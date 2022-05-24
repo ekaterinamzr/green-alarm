@@ -16,8 +16,10 @@
 | EM-DAT                                                                  | Все типы инцидентов и катастроф (не только экологических) | -           | -                                                                       |
 | Twitter                                                                 | Любые инциденты (и не только)                                          | -           | +                                                                       |
 ## Use-case диаграмма
+![Use-case диаграмма](https://github.com/ekaterinamzr/green-alarm/blob/main/doc/img/usecase.jpg)
 
 ## ER-диаграмма сущностей
+![ER-диаграмма сущностей](https://github.com/ekaterinamzr/green-alarm/blob/main/doc/img/er.svg)
 
 ## Архитектурные характеристики
 * Веб-приложение
