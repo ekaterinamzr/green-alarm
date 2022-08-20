@@ -1,0 +1,59 @@
+This is BibTeX, Version 0.99d (TeX Live 2020/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: utf8gost705u.bst
+Database file #1: biblio.bib
+Unbalanced braces---line 8 of file biblio.bib
+ :  howpublished="Режим доступа: https://wwf.ru/resources/news/ekologicheskaya-politika/wwf-predotvratit-ekologicheskie-katastrofy-mozhno-tolko-pri-uchastii-obshchestvennosti/
+ :                                                                                                                                                                                         } (дата обращения: 13.05.2022)"
+I'm skipping whatever remains of this entry
+Unbalanced braces---line 13 of file biblio.bib
+ : howpublished="Режим доступа: https://wwf.ru/resources/news/Regulirovanie/wwf-rossii-i-brend-fairy-zapustili-obshchestvennyy-monitoring-avariynykh-ekologicheskikh-situatsiy-v/
+ :                                                                                                                                                                                           } (дата обращения: 13.05.2022)"
+I'm skipping whatever remains of this entry
+Unbalanced braces---line 35 of file biblio.bib
+ :  howpublished="Режим доступа: \urlhttps://ria.ru/20201005/kamchatka-1578207502.html
+ :                                                                                                } (дата обращения: 13.05.2022)"
+I'm skipping whatever remains of this entry
+You've used 21 entries,
+            2958 wiz_defined-function locations,
+            728 strings with 9784 characters,
+and the built_in function-call counts, 2282 in all, are:
+= -- 225
+> -- 21
+< -- 0
++ -- 21
+- -- 0
+* -- 21
+:= -- 200
+add.period$ -- 40
+call.type$ -- 21
+change.case$ -- 0
+chr.to.int$ -- 0
+cite$ -- 21
+duplicate$ -- 147
+empty$ -- 337
+format.name$ -- 0
+if$ -- 583
+int.to.chr$ -- 0
+int.to.str$ -- 21
+missing$ -- 0
+newline$ -- 113
+num.names$ -- 0
+pop$ -- 128
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 64
+stack$ -- 0
+substring$ -- 0
+swap$ -- 61
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 0
+width$ -- 23
+write$ -- 234
+(There were 3 error messages)
