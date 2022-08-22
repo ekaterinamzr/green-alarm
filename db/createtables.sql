@@ -1,25 +1,21 @@
-DROP DATABASE IF EXISTS greenalarm;
-CREATE DATABASE greenalarm;
-\connect greenalarm
-
 CREATE TABLE Users (
   id SERIAL PRIMARY KEY,
-  name varchar NOT NULL,
-  surname varchar NOT NULL,
+  first_name varchar NOT NULL,
+  last_name varchar NOT NULL,
   username varchar NOT NULL UNIQUE,
   email varchar NOT NULL UNIQUE,
-  password varchar NOT NULL
-  role int NOT NULL
+  user_password varchar NOT NULL,
+  user_role int NOT NULL
 );
 
 CREATE TABLE Roles (
   id SERIAL PRIMARY KEY,
-  name varchar NOT NULL
+  role_name varchar NOT NULL
 );
 
 CREATE TABLE Incidents (
   id SERIAL PRIMARY KEY,
-  name varchar NOT NULL,
+  incident_name varchar NOT NULL,
   incident_date date,
   country varchar NOT NULL,
   latitude double precision,
@@ -27,37 +23,37 @@ CREATE TABLE Incidents (
   -- coordinate geography NOT NULL,
   publication_date date NOT NULL,
   comment text,
-  status int NOT NULL,
-  type int NOT NULL,
-  user int NOT NULL
+  incident_status int NOT NULL,
+  incident_type int NOT NULL,
+  author int NOT NULL
 );
 
 CREATE TABLE Statuses (
   id SERIAL PRIMARY KEY,
-  name varchar NOT NULL
+  status_name varchar NOT NULL
 );
 
 CREATE TABLE Images (
   id SERIAL PRIMARY KEY,
-  path varchar NOT NULL,
+  image_path varchar NOT NULL,
   incident int NOT NULL
 );
 
 CREATE TABLE Types (
   id SERIAL PRIMARY KEY,
-  name varchar NOT NULL
+  type_name varchar NOT NULL
 );
 
 CREATE TABLE Editing_Requests (
   id SERIAL PRIMARY KEY,
   old int NOT NULL,
   new int NOT NULL
-)
+);
 
-ALTER TABLE Users ADD FOREIGN KEY (role) REFERENCES Roles (id);
-ALTER TABLE Incidents ADD FOREIGN KEY (type) REFERENCES Types (id);
-ALTER TABLE Incidents ADD FOREIGN KEY (status) REFERENCES Statuses (id);
-ALTER TABLE Incidents ADD FOREIGN KEY (user) REFERENCES Users (id);
+ALTER TABLE Users ADD FOREIGN KEY (user_role) REFERENCES Roles (id);
+ALTER TABLE Incidents ADD FOREIGN KEY (incident_type) REFERENCES Types (id);
+ALTER TABLE Incidents ADD FOREIGN KEY (incident_status) REFERENCES Statuses (id);
+ALTER TABLE Incidents ADD FOREIGN KEY (author) REFERENCES Users (id);
 ALTER TABLE Images ADD FOREIGN KEY (incident) REFERENCES Incidents (id);
 ALTER TABLE Editing_Requests ADD FOREIGN KEY (old) REFERENCES Incidents (id);
 ALTER TABLE Editing_Requests ADD FOREIGN KEY (new) REFERENCES Incidents (id);
