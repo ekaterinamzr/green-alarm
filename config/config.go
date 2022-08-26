@@ -6,6 +6,10 @@ import (
 	"github.com/spf13/viper"
 )
 
+type LoggerConfig struct {
+	Level string
+}
+
 type DatabaseConfig struct {
 	Name     string
 	User     string
@@ -17,6 +21,7 @@ type ServerConfig struct {
 }
 
 type Config struct {
+	Logger     LoggerConfig
 	Database   DatabaseConfig
 	Server     ServerConfig
 	ExampleVar string
