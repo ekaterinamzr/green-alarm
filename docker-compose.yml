@@ -1,0 +1,32 @@
+version: '3.9'
+services:
+  app:
+    container_name: greenalarm
+    image: greenalarm
+    environment:
+      PG_URL: 'postgres://greenalarm:greenalarm@postgres:5432/greenalarm'
+    build: .
+    ports:
+      - 8000:8080
+    restart: always
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=greenalarm
+      - POSTGRES_PASSWORD=greenalarm
+      - POSTGRES_DB=greenalarm
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./initdb:/docker-entrypoint-initdb.d
+      - pgdata:/var/lib/postgresql/data
+      - ./csvs:/var/lib/postgresql/csvs
+    restart: always
+
+volumes:
+  pgdata:
+  

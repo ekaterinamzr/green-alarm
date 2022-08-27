@@ -14,6 +14,7 @@ type DatabaseConfig struct {
 	Name     string
 	User     string
 	Password string
+	URL      string
 }
 
 type ServerConfig struct {
@@ -31,7 +32,7 @@ func Load() (*Config, error) {
 	v := viper.New()
 	v.SetConfigName("config")
 	v.SetConfigType("yaml")
-	viper.AddConfigPath("config")
+	v.AddConfigPath("./config")
 
 	if err := v.ReadInConfig(); err != nil {
 		return nil, fmt.Errorf("failed to read the configuration file: %w", err)

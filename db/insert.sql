@@ -1,4 +1,4 @@
-\copy Types FROM '/home/ekaterina/goprojects/src/green-alarm/db/data/types.csv' DELIMITER ';' CSV;
+\copy Types FROM './data/types.csv' DELIMITER ';' CSV;
 \copy Roles FROM '/home/ekaterina/goprojects/src/green-alarm/db/data/roles.csv' DELIMITER ';' CSV;
 \copy Statuses FROM '/home/ekaterina/goprojects/src/green-alarm/db/data/statuses.csv' DELIMITER ';' CSV;
 \copy Users FROM '/home/ekaterina/goprojects/src/green-alarm/db/data/users.csv' DELIMITER ';' CSV;
