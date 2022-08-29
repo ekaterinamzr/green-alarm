@@ -1,11 +1,17 @@
-package entity 
+package entity
+
+const (
+	Admin      = 1
+	Moderator  = 2
+	Authorised = 3
+)
 
 type User struct {
-	id int `json:"id"`
-	first_name string `json:"first_name"`
-	last_name string `json:"last_name"`
-	username string `json:"username"`
-	email string `json:"email"`
-	password string `json:"user_password"`
-	role string `json:"user_role"`
+	Id         int    `json:"id"`
+	First_name string `json:"first_name"`
+	Last_name  string `json:"last_name"`
+	Username   string `json:"username"`
+	Email      string `json:"email"`
+	Password   string `json:"user_password"`
+	Role       int    `json:"user_role"`
 }

@@ -21,11 +21,15 @@ type ServerConfig struct {
 	Port string
 }
 
+type AuthConfig struct {
+	Salt string
+}
+
 type Config struct {
 	Logger     LoggerConfig
 	Database   DatabaseConfig
 	Server     ServerConfig
-	ExampleVar string
+	Auth AuthConfig
 }
 
 func Load() (*Config, error) {
