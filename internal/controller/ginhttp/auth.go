@@ -20,6 +20,7 @@ func setAuthRoutes(handler *gin.RouterGroup, u usecase.Auth, l logger.Logger) {
 	h := handler.Group("/user")
 	{
 		h.POST("signup", r.signUp)
+		h.POST("signin", r.signIn)
 	}
 }
 
@@ -32,12 +33,31 @@ func (r *authRoutes) signUp(c *gin.Context) {
 		return
 	}
 
-	id, err := r.uc.SignUp(c.Request.Context(), input)
+	output, err := r.uc.SignUp(c.Request.Context(), input)
 	if err != nil {
 		r.l.Error(err, "ginhttp - auth - signUp")
 		errorResponse(c, http.StatusInternalServerError, "invalid request body")
 		return
 	}
 
-	c.JSON(http.StatusOK, dto.SignUpResponse{Id: id})
+	c.JSON(http.StatusOK, output)
+}
+
+func (r *authRoutes) signIn(c *gin.Context) {
+	var input dto.SignInRequest
+
+	if err := c.BindJSON(&input); err != nil {
+		r.l.Error(err, "ginhttp - auth - signUp")
+		errorResponse(c, http.StatusBadRequest, "invalid request body")
+		return
+	}
+
+	output, err := r.uc.SignIn(c.Request.Context(), input)
+	if err != nil {
+		r.l.Error(err, "ginhttp - auth - signUp")
+		errorResponse(c, http.StatusInternalServerError, "no rows in result set")
+		return
+	}
+
+	c.JSON(http.StatusOK, output)
 }

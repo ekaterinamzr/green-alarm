@@ -11,3 +11,14 @@ type SignUpRequest struct {
 type SignUpResponse struct {
 	Id int `json:"id"`
 }
+
+type SignInRequest struct {
+	Username string `json:"username"`
+	Password string `json:"user_password"`
+}
+
+type SignInResponse struct {
+	Id    int    `json:"id"`
+	Token string `json:"token"`
+	Role  int    `json:"role"`
+}

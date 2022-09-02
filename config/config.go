@@ -23,6 +23,8 @@ type ServerConfig struct {
 
 type AuthConfig struct {
 	Salt string
+	TokenTTL int
+	SigningKey string
 }
 
 type Config struct {

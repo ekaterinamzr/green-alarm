@@ -28,7 +28,7 @@ func Run(cfg *config.Config) {
 
 	defer pg.Close()
 
-	userUseCase := usecase.NewAuthUseCase(pgrepo.NewUserRepository(pg), cfg.Auth.Salt)
+	userUseCase := usecase.NewAuthUseCase(pgrepo.NewUserRepository(pg), cfg.Auth.Salt, cfg.Auth.SigningKey, cfg.Auth.TokenTTL)
 
 	handler := gin.New()
 	ginhttp.NewRouter(handler, l, userUseCase)

@@ -10,8 +10,6 @@ func NewRouter(handler *gin.Engine, l logger.Logger, a usecase.Auth) {
 	handler.Use(gin.Logger())
 	handler.Use(gin.Recovery())
 
-	h := handler.Group("/v1")
-	{
-		setAuthRoutes(h, a, l)
-	}
+	setAuthRoutes(&handler.RouterGroup, a, l)
+
 }
