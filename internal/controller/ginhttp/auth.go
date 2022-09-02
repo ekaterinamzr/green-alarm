@@ -17,10 +17,10 @@ type authRoutes struct {
 func setAuthRoutes(handler *gin.RouterGroup, u usecase.Auth, l logger.Logger) {
 	r := &authRoutes{u, l}
 
-	h := handler.Group("/user")
+	h := handler.Group("/auth")
 	{
-		h.POST("signup", r.signUp)
-		h.POST("signin", r.signIn)
+		h.POST("sign-up", r.signUp)
+		h.POST("sign-in", r.signIn)
 	}
 }
 

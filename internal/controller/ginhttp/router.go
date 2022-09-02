@@ -10,6 +10,11 @@ func NewRouter(handler *gin.Engine, l logger.Logger, a usecase.Auth) {
 	handler.Use(gin.Logger())
 	handler.Use(gin.Recovery())
 
-	setAuthRoutes(&handler.RouterGroup, a, l)
+	h := handler.Group("/api")
+	{
+		setAuthRoutes(h, a, l)
+	}
+
+	setAuthRoutes(h, a, l)
 
 }
