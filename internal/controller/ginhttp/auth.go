@@ -4,17 +4,16 @@ import (
 	"net/http"
 
 	"github.com/ekaterinamzr/green-alarm/internal/dto"
-	"github.com/ekaterinamzr/green-alarm/internal/usecase"
 	"github.com/ekaterinamzr/green-alarm/pkg/logger"
 	"github.com/gin-gonic/gin"
 )
 
 type authRoutes struct {
-	uc usecase.Auth
+	uc Auth
 	l  logger.Logger
 }
 
-func setAuthRoutes(handler *gin.RouterGroup, u usecase.Auth, l logger.Logger) {
+func setAuthRoutes(handler *gin.RouterGroup, u Auth, l logger.Logger) {
 	r := &authRoutes{u, l}
 
 	h := handler.Group("/auth")

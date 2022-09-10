@@ -9,6 +9,7 @@ import (
 	"github.com/ekaterinamzr/green-alarm/config"
 	"github.com/ekaterinamzr/green-alarm/internal/controller/ginhttp"
 	"github.com/ekaterinamzr/green-alarm/internal/infrastructure/pgrepo"
+	"github.com/ekaterinamzr/green-alarm/internal/infrastructure/token"
 	"github.com/ekaterinamzr/green-alarm/internal/usecase"
 	"github.com/ekaterinamzr/green-alarm/pkg/httpserver"
 	"github.com/ekaterinamzr/green-alarm/pkg/logger"
@@ -28,10 +29,11 @@ func Run(cfg *config.Config) {
 
 	defer pg.Close()
 
-	userUseCase := usecase.NewAuthUseCase(pgrepo.NewUserRepository(pg), cfg.Auth.Salt, cfg.Auth.SigningKey, cfg.Auth.TokenTTL)
+	token := token.NewTokenService(cfg.Auth.TokenTTL, cfg.Auth.SigningKey)
+	authUseCase := usecase.NewAuthUseCase(pgrepo.NewUserRepository(pg), token, cfg.Auth.Salt)
 
 	handler := gin.New()
-	ginhttp.NewRouter(handler, l, userUseCase)
+	ginhttp.NewRouter(handler, l, authUseCase)
 	httpServer := httpserver.New(handler, httpserver.Port(cfg.Server.Port))
 
 	interrupt := make(chan os.Signal, 1)

@@ -22,3 +22,4 @@ type SignInResponse struct {
 	Token string `json:"token"`
 	Role  int    `json:"role"`
 }
+
