@@ -111,7 +111,7 @@ func (r *UserRepository) GetById(ctx context.Context, id int) (*entity.User, err
 
 func (r *UserRepository) Update(ctx context.Context, id int, updated entity.User) error {
 	query := `	UPDATE 
-					incidents 
+					users 
 				SET 
 					first_name = $1,
 					last_name = $2,
@@ -134,6 +134,26 @@ func (r *UserRepository) Update(ctx context.Context, id int, updated entity.User
 
 	if err != nil {
 		return fmt.Errorf("pgrepo - user - Update: %w", err)
+	}
+
+	return nil
+}
+
+func (r *UserRepository) UpdateRole(ctx context.Context, id, newRole int) error {
+	query := `	UPDATE 
+					users 
+				SET 
+					user_role = $1
+				WHERE 
+					id = $2`
+
+	_, err := r.DB.ExecContext(ctx, query,
+		newRole,
+		id,
+	)
+
+	if err != nil {
+		return fmt.Errorf("pgrepo - user - UpdateRole: %w", err)
 	}
 
 	return nil

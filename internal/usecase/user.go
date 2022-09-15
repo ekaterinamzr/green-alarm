@@ -12,6 +12,7 @@ type UserRepository interface {
 	GetAll(context.Context) ([]entity.User, error)
 	GetById(context.Context, int) (*entity.User, error)
 	Update(context.Context, int, entity.User) error
+	UpdateRole(context.Context, int, int) error
 	Delete(context.Context, int) error
 }
 
@@ -61,7 +62,27 @@ func (uc *UserUseCase) Update(ctx context.Context, data dto.UpdateUserRequest) e
 		Username:   data.Username,
 		Email:      data.Email,
 		Password:   data.Password,
-		Role:       data.Role,})
+		Role:       data.Role})
+
+	if err != nil {
+		return fmt.Errorf("UserUseCase - Update - uc.repo.Update: %w", err)
+	}
+
+	return nil
+}
+
+func (uc *UserUseCase) MakeDefault(ctx context.Context, data dto.MakeDefaultRequest) error {
+	err := uc.repo.UpdateRole(ctx, data.Id, entity.Authorised)
+
+	if err != nil {
+		return fmt.Errorf("UserUseCase - Update - uc.repo.Update: %w", err)
+	}
+
+	return nil
+}
+
+func (uc *UserUseCase) MakeModerator(ctx context.Context, data dto.MakeModeratorRequest) error {
+	err := uc.repo.UpdateRole(ctx, data.Id, entity.Moderator)
 
 	if err != nil {
 		return fmt.Errorf("UserUseCase - Update - uc.repo.Update: %w", err)

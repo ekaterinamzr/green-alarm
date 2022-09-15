@@ -35,3 +35,11 @@ type UpdateUserRequest struct {
 type DeleteUserRequest struct {
 	Id int `json:"id"`
 }
+
+type MakeDefaultRequest struct {
+	Id int `json:"id"`
+}
+
+type MakeModeratorRequest struct {
+	Id int `json:"id"`
+}
