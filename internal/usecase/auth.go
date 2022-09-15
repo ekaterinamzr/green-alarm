@@ -10,7 +10,7 @@ import (
 )
 
 type AuthRepository interface {
-	CreateUser(context.Context, entity.User) (int, error)
+	Create(context.Context, entity.User) (int, error)
 	GetUser(context.Context, string, string) (*entity.User, error)
 }
 
@@ -36,7 +36,7 @@ func NewAuthUseCase(r AuthRepository, t TokenService, salt string) *AuthUseCase 
 func (uc *AuthUseCase) SignUp(ctx context.Context, u dto.SignUpRequest) (*dto.SignUpResponse, error) {
 	u.Password = uc.generatePasswordHash(u.Password)
 
-	id, err := uc.repo.CreateUser(ctx, entity.User{
+	id, err := uc.repo.Create(ctx, entity.User{
 		First_name: u.First_name,
 		Last_name:  u.Last_name,
 		Username:   u.Username,

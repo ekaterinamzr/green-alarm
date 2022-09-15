@@ -1,10 +1,15 @@
 package entity
 
 const (
-	Admin      = 1
-	Moderator  = 2
-	Authorised = 3
+	Admin = iota + 1
+	Moderator
+	Authorised
 )
+
+type UserRole struct {
+	Id               int       `json:"id" db:"id"`
+	Name             string    `json:"role_name" db:"role_name"`
+}
 
 type User struct {
 	Id         int    `json:"id" db:"id"`

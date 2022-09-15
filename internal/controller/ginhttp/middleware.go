@@ -12,7 +12,25 @@ const (
 	authHeader = "Authorization"
 )
 
-func userIdentity(t func(context.Context, string) (id int, role int, err error)) gin.HandlerFunc {
+type middleware struct {
+	parseToken func(context.Context, string) (id int, role int, err error)
+}
+
+func newMiddleware(parseToken func(context.Context, string) (id int, role int, err error)) *middleware{
+	return &middleware{parseToken: parseToken}
+}
+
+func (m *middleware) checkRole(requiredRole int) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		if c.GetInt("userRole") > requiredRole {
+			errorResponse(c, http.StatusUnauthorized, "permission denied")
+			return
+		}
+		c.Next()
+	}
+}
+
+func (m *middleware) userIdentity() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		header := c.GetHeader(authHeader)
 		if header == "" {
@@ -26,7 +44,7 @@ func userIdentity(t func(context.Context, string) (id int, role int, err error))
 			return
 		}
 
-		userId, userRole, err := t(c.Request.Context(), headerParts[1])
+		userId, userRole, err := m.parseToken(c.Request.Context(), headerParts[1])
 		if err != nil {
 			errorResponse(c, http.StatusUnauthorized, "could not parse token")
 			return

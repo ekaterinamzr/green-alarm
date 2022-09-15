@@ -31,9 +31,10 @@ func Run(cfg *config.Config) {
 
 	token := token.NewTokenService(cfg.Auth.TokenTTL, cfg.Auth.SigningKey)
 	authUseCase := usecase.NewAuthUseCase(pgrepo.NewUserRepository(pg), token, cfg.Auth.Salt)
+	incidentUseCase := usecase.NewIncidentUseCase(pgrepo.NewIncidentRepository(pg))
 
 	handler := gin.New()
-	ginhttp.NewRouter(handler, l, authUseCase)
+	ginhttp.NewRouter(handler, l, authUseCase, incidentUseCase)
 	httpServer := httpserver.New(handler, httpserver.Port(cfg.Server.Port))
 
 	interrupt := make(chan os.Signal, 1)
