@@ -9,6 +9,7 @@ import (
 )
 
 type StatusRepository interface {
+	Create(context.Context, entity.IncidentStatus) (int, error)
 	GetAll(context.Context) ([]entity.IncidentStatus, error)
 	GetById(context.Context, int) (*entity.IncidentStatus, error)
 	Update(context.Context, int, entity.IncidentStatus) error
@@ -23,6 +24,18 @@ func NewStatusUseCase(r StatusRepository) *StatusUseCase {
 	return &StatusUseCase{
 		repo: r,
 	}
+}
+
+func (uc *StatusUseCase) Create(ctx context.Context, data dto.CreateStatusRequest) (*dto.CreateStatusResponse, error) {
+	id, err := uc.repo.Create(ctx, entity.IncidentStatus{
+		Name: data.Name,
+	})
+
+	if err != nil {
+		return nil, fmt.Errorf("StatusUseCase - Create - uc.repo.Create: %w", err)
+	}
+
+	return &dto.CreateStatusResponse{Id: id}, nil
 }
 
 func (uc *StatusUseCase) GetAll(ctx context.Context) (*dto.GetAllStatusesResponse, error) {

@@ -9,6 +9,7 @@ import (
 )
 
 type TypeRepository interface {
+	Create(context.Context, entity.IncidentType) (int, error)
 	GetAll(context.Context) ([]entity.IncidentType, error)
 	GetById(context.Context, int) (*entity.IncidentType, error)
 	Update(context.Context, int, entity.IncidentType) error
@@ -23,6 +24,18 @@ func NewTypeUseCase(r TypeRepository) *TypeUseCase {
 	return &TypeUseCase{
 		repo: r,
 	}
+}
+
+func (uc *TypeUseCase) Create(ctx context.Context, data dto.CreateTypeRequest) (*dto.CreateTypeResponse, error) {
+	id, err := uc.repo.Create(ctx, entity.IncidentType{
+		Name: data.Name,
+	})
+
+	if err != nil {
+		return nil, fmt.Errorf("TypeUseCase - Create - uc.repo.Create: %w", err)
+	}
+
+	return &dto.CreateTypeResponse{Id: id}, nil
 }
 
 func (uc *TypeUseCase) GetAll(ctx context.Context) (*dto.GetAllTypesResponse, error) {

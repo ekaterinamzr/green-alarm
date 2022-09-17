@@ -15,6 +15,7 @@ type IncidentRepository interface {
 	GetById(context.Context, int) (*entity.Incident, error)
 	Update(context.Context, int, entity.Incident) error
 	Delete(context.Context, int) error
+	GetByType(context.Context, int) ([]entity.Incident, error)
 }
 
 type IncidentUseCase struct {
@@ -56,6 +57,16 @@ func (uc *IncidentUseCase) GetAll(ctx context.Context) (*dto.GetAllIncidentsResp
 	}
 
 	return &dto.GetAllIncidentsResponse{Incidents: all}, nil
+}
+
+func (uc *IncidentUseCase) GetByType(ctx context.Context, data dto.GetIncidentsByTypeRequest) (*dto.GetIncidentsByTypeResponse, error) {
+	incidents, err := uc.repo.GetByType(ctx, data.IncidentType)
+
+	if err != nil {
+		return nil, fmt.Errorf("IncidentUseCase - GetByType - uc.repo.GetAll: %w", err)
+	}
+
+	return &dto.GetIncidentsByTypeResponse{Incidents: incidents}, nil
 }
 
 func (uc *IncidentUseCase) GetById(ctx context.Context, data dto.GetIncidentByIdRequest) (*dto.GetIncidentByIdResponse, error) {

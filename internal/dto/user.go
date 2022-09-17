@@ -36,10 +36,7 @@ type DeleteUserRequest struct {
 	Id int `json:"id"`
 }
 
-type MakeDefaultRequest struct {
+type ChangeRoleRequest struct {
 	Id int `json:"id"`
-}
-
-type MakeModeratorRequest struct {
-	Id int `json:"id"`
+	NewRole int `json:"id"`
 }

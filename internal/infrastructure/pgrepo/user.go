@@ -139,7 +139,7 @@ func (r *UserRepository) Update(ctx context.Context, id int, updated entity.User
 	return nil
 }
 
-func (r *UserRepository) UpdateRole(ctx context.Context, id, newRole int) error {
+func (r *UserRepository) ChangeRole(ctx context.Context, id, newRole int) error {
 	query := `	UPDATE 
 					users 
 				SET 

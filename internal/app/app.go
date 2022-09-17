@@ -30,11 +30,26 @@ func Run(cfg *config.Config) {
 	defer pg.Close()
 
 	token := token.NewTokenService(cfg.Auth.TokenTTL, cfg.Auth.SigningKey)
+
 	authUseCase := usecase.NewAuthUseCase(pgrepo.NewUserRepository(pg), token, cfg.Auth.Salt)
 	incidentUseCase := usecase.NewIncidentUseCase(pgrepo.NewIncidentRepository(pg))
 
+	statusUseCase := usecase.NewStatusUseCase(pgrepo.NewStatusRepository(pg))
+	typeUseCase := usecase.NewTypeUseCase(pgrepo.NewTypeRepository(pg))
+
+	userUseCase := usecase.NewUserUseCase(pgrepo.NewUserRepository(pg))
+	roleUseCase := usecase.NewRoleUseCase(pgrepo.NewRoleRepository(pg))
+
 	handler := gin.New()
-	ginhttp.NewRouter(handler, l, authUseCase, incidentUseCase)
+	ginhttp.NewRouter(handler, l, 
+		authUseCase, 
+		incidentUseCase,
+		typeUseCase,
+		statusUseCase,
+		userUseCase,
+		roleUseCase,
+	)
+	
 	httpServer := httpserver.New(handler, httpserver.Port(cfg.Server.Port))
 
 	interrupt := make(chan os.Signal, 1)

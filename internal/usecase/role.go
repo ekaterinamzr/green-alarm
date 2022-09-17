@@ -9,6 +9,7 @@ import (
 )
 
 type RoleRepository interface {
+	Create(context.Context, entity.UserRole) (int, error)
 	GetAll(context.Context) ([]entity.UserRole, error)
 	GetById(context.Context, int) (*entity.UserRole, error)
 	Update(context.Context, int, entity.UserRole) error
@@ -23,6 +24,18 @@ func NewRoleUseCase(r RoleRepository) *RoleUseCase {
 	return &RoleUseCase{
 		repo: r,
 	}
+}
+
+func (uc *RoleUseCase) Create(ctx context.Context, data dto.CreateRoleRequest) (*dto.CreateRoleResponse, error) {
+	id, err := uc.repo.Create(ctx, entity.UserRole{
+		Name: data.Name,
+	})
+
+	if err != nil {
+		return nil, fmt.Errorf("RoleUseCase - Create - uc.repo.Create: %w", err)
+	}
+
+	return &dto.CreateRoleResponse{Id: id}, nil
 }
 
 func (uc *RoleUseCase) GetAll(ctx context.Context) (*dto.GetAllRolesResponse, error) {
@@ -51,7 +64,7 @@ func (uc *RoleUseCase) GetById(ctx context.Context, data dto.GetRoleByIdRequest)
 func (uc *RoleUseCase) Update(ctx context.Context, data dto.UpdateRoleRequest) error {
 	err := uc.repo.Update(ctx, data.Id, entity.UserRole{
 		Id:   data.Id,
-		Name: data.Name,})
+		Name: data.Name})
 
 	if err != nil {
 		return fmt.Errorf("RoleUseCase - Update - uc.repo.Update: %w", err)

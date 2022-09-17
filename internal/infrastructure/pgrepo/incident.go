@@ -96,6 +96,33 @@ func (r *IncidentRepository) GetById(ctx context.Context, id int) (*entity.Incid
 	return &incident, nil
 }
 
+func (r *IncidentRepository) GetByType(ctx context.Context, requiredType int) ([]entity.Incident, error) {
+	var incidents []entity.Incident
+
+	query := `	SELECT 
+					id, 
+					incident_name, 
+					incident_date, 
+					country, 
+					latitude, 
+					longitude, 
+					publication_date, 
+					COALESCE(comment, '') AS comment, 
+					incident_status, 
+					incident_type, 
+					author 
+				FROM 
+					incidents
+				WHERE 
+					incident_type = requiredType`
+					
+	if err := r.DB.SelectContext(ctx, &incidents, query); err != nil {
+		return nil, fmt.Errorf("pgrepo - incident - GetByType: %w", err)
+	}
+
+	return incidents, nil
+}
+
 func (r *IncidentRepository) Update(ctx context.Context, id int, updated entity.Incident) error {
 	query := `	UPDATE 
 					incidents 

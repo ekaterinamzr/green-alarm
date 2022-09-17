@@ -9,40 +9,36 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type incidentRoutes struct {
-	uc Incident
+type roleRoutes struct {
+	uc UserRole
 	l  logger.Logger
 }
 
-func setIncidentRoutes(handler *gin.RouterGroup, m *middleware, uc Incident, l logger.Logger) {
-	r := &incidentRoutes{uc, l}
+func setRoleRoutes(handler *gin.RouterGroup, m *middleware, uc UserRole, l logger.Logger) {
+	r := &roleRoutes{uc, l}
 
-	h := handler.Group("/incidents")
+	h := handler.Group("/roles")
 	{
 		h.GET("/", r.getAll)
 		h.POST("/", r.create)
 		h.GET(":id", r.getById)
 		h.PUT(":id", r.update)
 		h.DELETE(":id", r.delete)
-		h.GET("/type/:type", r.getByType)
 	}
 }
 
-func (r *incidentRoutes) create(c *gin.Context) {
-	var input dto.CreateIncidentRequest
+func (r *roleRoutes) create(c *gin.Context) {
+	var input dto.CreateRoleRequest
 
 	if err := c.BindJSON(&input); err != nil {
-		r.l.Error(err, "ginhttp - incident - create")
+		r.l.Error(err, "ginhttp - role - create")
 		errorResponse(c, http.StatusBadRequest, "invalid request body")
 		return
 	}
 
-	// input.Author = c.GetInt("userId")
-	input.Author = 1
-
 	output, err := r.uc.Create(c.Request.Context(), input)
 	if err != nil {
-		r.l.Error(err, "ginhttp - incident - create")
+		r.l.Error(err, "ginhttp - role - create")
 		errorResponse(c, http.StatusInternalServerError, "invalid request body")
 		return
 	}
@@ -50,10 +46,10 @@ func (r *incidentRoutes) create(c *gin.Context) {
 	c.JSON(http.StatusOK, output)
 }
 
-func (r *incidentRoutes) getAll(c *gin.Context) {
+func (r *roleRoutes) getAll(c *gin.Context) {
 	output, err := r.uc.GetAll(c.Request.Context())
 	if err != nil {
-		r.l.Error(err, "ginhttp - incident - getAll")
+		r.l.Error(err, "ginhttp - role - getAll")
 		errorResponse(c, http.StatusInternalServerError, "invalid request body")
 		return
 	}
@@ -61,12 +57,12 @@ func (r *incidentRoutes) getAll(c *gin.Context) {
 	c.JSON(http.StatusOK, output)
 }
 
-func (r *incidentRoutes) getById(c *gin.Context) {
-	var input dto.GetIncidentByIdRequest
+func (r *roleRoutes) getById(c *gin.Context) {
+	var input dto.GetRoleByIdRequest
 
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
-		r.l.Error(err, "ginhttp - incident - getById")
+		r.l.Error(err, "ginhttp - role - getById")
 		errorResponse(c, http.StatusBadRequest, "invalid id param")
 		return
 	}
@@ -75,7 +71,7 @@ func (r *incidentRoutes) getById(c *gin.Context) {
 
 	output, err := r.uc.GetById(c.Request.Context(), input)
 	if err != nil {
-		r.l.Error(err, "ginhttp - incident - getById")
+		r.l.Error(err, "ginhttp - role - getById")
 		errorResponse(c, http.StatusInternalServerError, "invalid request")
 		return
 	}
@@ -83,40 +79,18 @@ func (r *incidentRoutes) getById(c *gin.Context) {
 	c.JSON(http.StatusOK, output)
 }
 
-func (r *incidentRoutes) getByType(c *gin.Context) {
-	var input dto.GetIncidentsByTypeRequest
-
-	incidentType, err := strconv.Atoi(c.Param("type"))
-	if err != nil {
-		r.l.Error(err, "ginhttp - incident - getByType")
-		errorResponse(c, http.StatusBadRequest, "invalid type param")
-		return
-	}
-
-	input.IncidentType = incidentType
-
-	output, err := r.uc.GetByType(c.Request.Context(), input)
-	if err != nil {
-		r.l.Error(err, "ginhttp - incident - getById")
-		errorResponse(c, http.StatusInternalServerError, "invalid request")
-		return
-	}
-
-	c.JSON(http.StatusOK, output)
-}
-
-func (r *incidentRoutes) update(c *gin.Context) {
-	var input dto.UpdateIncidentRequest
+func (r *roleRoutes) update(c *gin.Context) {
+	var input dto.UpdateRoleRequest
 
 	if err := c.BindJSON(&input); err != nil {
-		r.l.Error(err, "ginhttp - incident - update")
+		r.l.Error(err, "ginhttp - role - update")
 		errorResponse(c, http.StatusBadRequest, "invalid request body")
 		return
 	}
 
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
-		r.l.Error(err, "ginhttp - incident - update")
+		r.l.Error(err, "ginhttp - role - update")
 		errorResponse(c, http.StatusBadRequest, "invalid id param")
 		return
 	}
@@ -125,7 +99,7 @@ func (r *incidentRoutes) update(c *gin.Context) {
 
 	err = r.uc.Update(c.Request.Context(), input)
 	if err != nil {
-		r.l.Error(err, "ginhttp - incident - update")
+		r.l.Error(err, "ginhttp - role - update")
 		errorResponse(c, http.StatusInternalServerError, "invalid request")
 		return
 	}
@@ -133,12 +107,12 @@ func (r *incidentRoutes) update(c *gin.Context) {
 	c.Status(http.StatusOK)
 }
 
-func (r *incidentRoutes) delete(c *gin.Context) {
-	var input dto.DeleteIncidentRequest
+func (r *roleRoutes) delete(c *gin.Context) {
+	var input dto.DeleteRoleRequest
 
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
-		r.l.Error(err, "ginhttp - incident - delete")
+		r.l.Error(err, "ginhttp - role - delete")
 		errorResponse(c, http.StatusBadRequest, "invalid id param")
 		return
 	}
@@ -147,7 +121,7 @@ func (r *incidentRoutes) delete(c *gin.Context) {
 
 	err = r.uc.Delete(c.Request.Context(), input)
 	if err != nil {
-		r.l.Error(err, "ginhttp - incident - delete")
+		r.l.Error(err, "ginhttp - role - delete")
 		errorResponse(c, http.StatusInternalServerError, "invalid request")
 		return
 	}

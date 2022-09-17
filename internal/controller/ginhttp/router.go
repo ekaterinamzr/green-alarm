@@ -21,18 +21,57 @@ type Incident interface {
 	GetById(context.Context, dto.GetIncidentByIdRequest) (*dto.GetIncidentByIdResponse, error)
 	Update(context.Context, dto.UpdateIncidentRequest) error
 	Delete(context.Context, dto.DeleteIncidentRequest) error
+	GetByType(context.Context, dto.GetIncidentsByTypeRequest) (*dto.GetIncidentsByTypeResponse, error)
 }
 
-func NewRouter(handler *gin.Engine, l logger.Logger, a Auth, i Incident) {
+type IncidentType interface {
+	Create(context.Context, dto.CreateTypeRequest) (*dto.CreateTypeResponse, error)
+	GetAll(context.Context) (*dto.GetAllTypesResponse, error)
+	GetById(context.Context, dto.GetTypeByIdRequest) (*dto.GetTypeByIdResponse, error)
+	Update(context.Context, dto.UpdateTypeRequest) error
+	Delete(context.Context, dto.DeleteTypeRequest) error
+}
+
+type IncidentStatus interface {
+	Create(context.Context, dto.CreateStatusRequest) (*dto.CreateStatusResponse, error)
+	GetAll(context.Context) (*dto.GetAllStatusesResponse, error)
+	GetById(context.Context, dto.GetStatusByIdRequest) (*dto.GetStatusByIdResponse, error)
+	Update(context.Context, dto.UpdateStatusRequest) error
+	Delete(context.Context, dto.DeleteStatusRequest) error
+}
+
+type User interface {
+	GetAll(context.Context) (*dto.GetAllUsersResponse, error)
+	GetById(context.Context, dto.GetUserByIdRequest) (*dto.GetUserByIdResponse, error)
+	Update(context.Context, dto.UpdateUserRequest) error
+	Delete(context.Context, dto.DeleteUserRequest) error
+	ChangeRole(context.Context, dto.ChangeRoleRequest) error
+}
+
+type UserRole interface {
+	Create(context.Context, dto.CreateRoleRequest) (*dto.CreateRoleResponse, error)
+	GetAll(context.Context) (*dto.GetAllRolesResponse, error)
+	GetById(context.Context, dto.GetRoleByIdRequest) (*dto.GetRoleByIdResponse, error)
+	Update(context.Context, dto.UpdateRoleRequest) error
+	Delete(context.Context, dto.DeleteRoleRequest) error
+}
+
+func NewRouter(handler *gin.Engine, l logger.Logger, a Auth, i Incident, t IncidentType, s IncidentStatus, u User, r UserRole) {
 	handler.Use(gin.Logger())
 	handler.Use(gin.Recovery())
-	
+
 	m := newMiddleware(a.ParseToken)
 
 	h := handler.Group("/api")
 	{
 		setAuthRoutes(h, a, l)
 		setIncidentRoutes(h, m, i, l)
+
+		setTypeRoutes(h, m, t, l)
+		setStatusRoutes(h, m, s, l)
+
+		setUserRoutes(h, m, u, l)
+		setRoleRoutes(h, m, r, l)
 	}
 
 }
