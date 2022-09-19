@@ -33,12 +33,6 @@ CREATE TABLE Statuses (
   status_name varchar NOT NULL
 );
 
-CREATE TABLE Images (
-  id SERIAL PRIMARY KEY,
-  image_path varchar NOT NULL,
-  incident int NOT NULL
-);
-
 CREATE TABLE Types (
   id SERIAL PRIMARY KEY,
   type_name varchar NOT NULL
@@ -54,7 +48,6 @@ ALTER TABLE Users ADD FOREIGN KEY (user_role) REFERENCES Roles (id);
 ALTER TABLE Incidents ADD FOREIGN KEY (incident_type) REFERENCES Types (id);
 ALTER TABLE Incidents ADD FOREIGN KEY (incident_status) REFERENCES Statuses (id);
 ALTER TABLE Incidents ADD FOREIGN KEY (author) REFERENCES Users (id);
-ALTER TABLE Images ADD FOREIGN KEY (incident) REFERENCES Incidents (id);
 ALTER TABLE Editing_Requests ADD FOREIGN KEY (old) REFERENCES Incidents (id);
 ALTER TABLE Editing_Requests ADD FOREIGN KEY (new) REFERENCES Incidents (id);
 
