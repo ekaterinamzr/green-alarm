@@ -38,5 +38,5 @@ type DeleteUserRequest struct {
 
 type ChangeRoleRequest struct {
 	Id int `json:"id"`
-	NewRole int `json:"id"`
+	NewRole int `json:"NewRole"`
 }

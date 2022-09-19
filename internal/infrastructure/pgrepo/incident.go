@@ -60,7 +60,7 @@ func (r *IncidentRepository) GetAll(ctx context.Context) ([]entity.Incident, err
 					author 
 				FROM 
 					incidents`
-					
+
 	if err := r.DB.SelectContext(ctx, &all, query); err != nil {
 		return nil, fmt.Errorf("pgrepo - incident - GetAll: %w", err)
 	}
@@ -114,9 +114,9 @@ func (r *IncidentRepository) GetByType(ctx context.Context, requiredType int) ([
 				FROM 
 					incidents
 				WHERE 
-					incident_type = requiredType`
-					
-	if err := r.DB.SelectContext(ctx, &incidents, query); err != nil {
+					incident_type = $1`
+
+	if err := r.DB.SelectContext(ctx, &incidents, query, requiredType); err != nil {
 		return nil, fmt.Errorf("pgrepo - incident - GetByType: %w", err)
 	}
 

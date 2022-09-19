@@ -22,16 +22,16 @@ type ServerConfig struct {
 }
 
 type AuthConfig struct {
-	Salt string
-	TokenTTL int
+	Salt       string
+	TokenTTL   int
 	SigningKey string
 }
 
 type Config struct {
-	Logger     LoggerConfig
-	Database   DatabaseConfig
-	Server     ServerConfig
-	Auth AuthConfig
+	Logger   LoggerConfig
+	Database DatabaseConfig
+	Server   ServerConfig
+	Auth     AuthConfig
 }
 
 func Load() (*Config, error) {

@@ -5,6 +5,7 @@ import (
 
 	"github.com/ekaterinamzr/green-alarm/internal/dto"
 	"github.com/ekaterinamzr/green-alarm/pkg/logger"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -59,6 +60,8 @@ type UserRole interface {
 func NewRouter(handler *gin.Engine, l logger.Logger, a Auth, i Incident, t IncidentType, s IncidentStatus, u User, r UserRole) {
 	handler.Use(gin.Logger())
 	handler.Use(gin.Recovery())
+
+	handler.Use(cors.Default())
 
 	m := newMiddleware(a.ParseToken)
 

@@ -58,7 +58,7 @@ func (r *incidentRoutes) getAll(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, output)
+	c.JSON(http.StatusOK, output.Incidents)
 }
 
 func (r *incidentRoutes) getById(c *gin.Context) {
@@ -97,12 +97,12 @@ func (r *incidentRoutes) getByType(c *gin.Context) {
 
 	output, err := r.uc.GetByType(c.Request.Context(), input)
 	if err != nil {
-		r.l.Error(err, "ginhttp - incident - getById")
+		r.l.Error(err, "ginhttp - incident - getByType")
 		errorResponse(c, http.StatusInternalServerError, "invalid request")
 		return
 	}
 
-	c.JSON(http.StatusOK, output)
+	c.JSON(http.StatusOK, output.Incidents)
 }
 
 func (r *incidentRoutes) update(c *gin.Context) {

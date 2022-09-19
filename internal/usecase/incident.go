@@ -63,7 +63,7 @@ func (uc *IncidentUseCase) GetByType(ctx context.Context, data dto.GetIncidentsB
 	incidents, err := uc.repo.GetByType(ctx, data.IncidentType)
 
 	if err != nil {
-		return nil, fmt.Errorf("IncidentUseCase - GetByType - uc.repo.GetAll: %w", err)
+		return nil, fmt.Errorf("IncidentUseCase - GetByType - uc.repo.GetByType: %w", err)
 	}
 
 	return &dto.GetIncidentsByTypeResponse{Incidents: incidents}, nil
