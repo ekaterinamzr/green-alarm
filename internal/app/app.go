@@ -21,7 +21,7 @@ func Run(cfg *config.Config) {
 	l := logger.New(cfg.Logger.Level)
 	l.Debug("App is running!")
 
-	pg, err := postgres.New(cfg.Database.URL)
+	pg, err := postgres.New(cfg.Database.URI)
 	if err != nil {
 		l.Fatal(err, "app - Run - postgres.New")
 	}

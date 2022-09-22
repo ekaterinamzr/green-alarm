@@ -14,7 +14,7 @@ type DatabaseConfig struct {
 	Name     string
 	User     string
 	Password string
-	URL      string
+	URI      string
 }
 
 type ServerConfig struct {
