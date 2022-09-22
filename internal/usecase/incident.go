@@ -10,11 +10,11 @@ import (
 )
 
 type IncidentRepository interface {
-	Create(context.Context, entity.Incident) (int, error)
+	Create(context.Context, entity.Incident) (string, error)
 	GetAll(context.Context) ([]entity.Incident, error)
-	GetById(context.Context, int) (*entity.Incident, error)
-	Update(context.Context, int, entity.Incident) error
-	Delete(context.Context, int) error
+	GetById(context.Context, string) (*entity.Incident, error)
+	Update(context.Context, string, entity.Incident) error
+	Delete(context.Context, string) error
 	GetByType(context.Context, int) ([]entity.Incident, error)
 }
 
@@ -29,6 +29,7 @@ func NewIncidentUseCase(r IncidentRepository) *IncidentUseCase {
 }
 
 func (uc *IncidentUseCase) Create(ctx context.Context, data dto.CreateIncidentRequest) (*dto.CreateIncidentResponse, error) {
+	// time.Parse("2006-01-02", dateString)
 	id, err := uc.repo.Create(ctx, entity.Incident{
 		Name:             data.Name,
 		Date:             data.Date,

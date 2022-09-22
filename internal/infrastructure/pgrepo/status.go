@@ -16,8 +16,8 @@ func NewStatusRepository(pg *postgres.Postgres) *StatusRepository {
 	return &StatusRepository{pg}
 }
 
-func (r *StatusRepository) Create(ctx context.Context, t entity.IncidentStatus) (int, error) {
-	var id int
+func (r *StatusRepository) Create(ctx context.Context, t entity.IncidentStatus) (string, error) {
+	var id string
 	query := `	INSERT INTO 
 					statuses (
 						status_name) 
@@ -29,7 +29,7 @@ func (r *StatusRepository) Create(ctx context.Context, t entity.IncidentStatus) 
 	row := r.DB.QueryRowContext(ctx, query, t.Name)
 	err := row.Scan(&id)
 	if err != nil {
-		return 0, fmt.Errorf("pgrepo - status - CreateStatus: %w", err)
+		return "", fmt.Errorf("pgrepo - status - CreateStatus: %w", err)
 	}
 	return id, nil
 }
@@ -50,7 +50,7 @@ func (r *StatusRepository) GetAll(ctx context.Context) ([]entity.IncidentStatus,
 	return all, nil
 }
 
-func (r *StatusRepository) GetById(ctx context.Context, id int) (*entity.IncidentStatus, error) {
+func (r *StatusRepository) GetById(ctx context.Context, id string) (*entity.IncidentStatus, error) {
 	var s entity.IncidentStatus
 
 	query := `	SELECT 
@@ -69,7 +69,7 @@ func (r *StatusRepository) GetById(ctx context.Context, id int) (*entity.Inciden
 	return &s, nil
 }
 
-func (r *StatusRepository) Update(ctx context.Context, id int, updated entity.IncidentStatus) error {
+func (r *StatusRepository) Update(ctx context.Context, id string, updated entity.IncidentStatus) error {
 	query := `	UPDATE 
 					statuses 
 				SET 
@@ -86,7 +86,7 @@ func (r *StatusRepository) Update(ctx context.Context, id int, updated entity.In
 	return nil
 }
 
-func (r *StatusRepository) Delete(ctx context.Context, id int) error {
+func (r *StatusRepository) Delete(ctx context.Context, id string) error {
 	query := `	DELETE 
 				FROM 
 					statuses 

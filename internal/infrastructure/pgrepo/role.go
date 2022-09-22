@@ -16,8 +16,8 @@ func NewRoleRepository(pg *postgres.Postgres) *RoleRepository {
 	return &RoleRepository{pg}
 }
 
-func (r *RoleRepository) Create(ctx context.Context, t entity.UserRole) (int, error) {
-	var id int
+func (r *RoleRepository) Create(ctx context.Context, t entity.UserRole) (string, error) {
+	var id string
 	query := `	INSERT INTO 
 					roles (
 						role_name) 
@@ -29,7 +29,7 @@ func (r *RoleRepository) Create(ctx context.Context, t entity.UserRole) (int, er
 	row := r.DB.QueryRowContext(ctx, query, t.Name)
 	err := row.Scan(&id)
 	if err != nil {
-		return 0, fmt.Errorf("pgrepo - role - CreateRole: %w", err)
+		return "", fmt.Errorf("pgrepo - role - CreateRole: %w", err)
 	}
 	return id, nil
 }
@@ -50,7 +50,7 @@ func (r *RoleRepository) GetAll(ctx context.Context) ([]entity.UserRole, error) 
 	return all, nil
 }
 
-func (r *RoleRepository) GetById(ctx context.Context, id int) (*entity.UserRole, error) {
+func (r *RoleRepository) GetById(ctx context.Context, id string) (*entity.UserRole, error) {
 	var role entity.UserRole
 
 	query := `	SELECT 
@@ -69,7 +69,7 @@ func (r *RoleRepository) GetById(ctx context.Context, id int) (*entity.UserRole,
 	return &role, nil
 }
 
-func (r *RoleRepository) Update(ctx context.Context, id int, updated entity.UserRole) error {
+func (r *RoleRepository) Update(ctx context.Context, id string, updated entity.UserRole) error {
 	query := `	UPDATE 
 					roles 
 				SET 
@@ -86,7 +86,7 @@ func (r *RoleRepository) Update(ctx context.Context, id int, updated entity.User
 	return nil
 }
 
-func (r *RoleRepository) Delete(ctx context.Context, id int) error {
+func (r *RoleRepository) Delete(ctx context.Context, id string) error {
 	query := `	DELETE 
 				FROM 
 					roles 

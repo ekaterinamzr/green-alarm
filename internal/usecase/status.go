@@ -9,11 +9,11 @@ import (
 )
 
 type StatusRepository interface {
-	Create(context.Context, entity.IncidentStatus) (int, error)
+	Create(context.Context, entity.IncidentStatus) (string, error)
 	GetAll(context.Context) ([]entity.IncidentStatus, error)
-	GetById(context.Context, int) (*entity.IncidentStatus, error)
-	Update(context.Context, int, entity.IncidentStatus) error
-	Delete(context.Context, int) error
+	GetById(context.Context, string) (*entity.IncidentStatus, error)
+	Update(context.Context, string, entity.IncidentStatus) error
+	Delete(context.Context, string) error
 }
 
 type StatusUseCase struct {
@@ -64,7 +64,7 @@ func (uc *StatusUseCase) GetById(ctx context.Context, data dto.GetStatusByIdRequ
 func (uc *StatusUseCase) Update(ctx context.Context, data dto.UpdateStatusRequest) error {
 	err := uc.repo.Update(ctx, data.Id, entity.IncidentStatus{
 		Id:   data.Id,
-		Name: data.Name,})
+		Name: data.Name})
 
 	if err != nil {
 		return fmt.Errorf("StatusUseCase - Update - uc.repo.Update: %w", err)

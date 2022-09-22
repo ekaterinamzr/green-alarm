@@ -22,11 +22,11 @@ func NewTokenService(tokenTTL int, signingKey string) *TokenService {
 
 type UserJWTClaims struct {
 	jwt.StandardClaims
-	UserId   int `json:"user_id"`
+	UserId   string `json:"user_id"`
 	UserRole int `json:"user_role"`
 }
 
-func (s *TokenService) GenerateToken(ctx context.Context, id, role int) (string, error) {
+func (s *TokenService) GenerateToken(ctx context.Context, id string, role int) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, &UserJWTClaims{
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(s.tokenTTL).Unix(),
@@ -44,7 +44,7 @@ func (s *TokenService) GenerateToken(ctx context.Context, id, role int) (string,
 	return signedToken, nil
 }
 
-func (s *TokenService) ParseToken(ctx context.Context, tokenString string) (int, int, error) {
+func (s *TokenService) ParseToken(ctx context.Context, tokenString string) (string, int, error) {
 	t, err := jwt.ParseWithClaims(tokenString, &UserJWTClaims{}, func(t *jwt.Token) (interface{}, error) {
 		if _, ok := t.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("invalid signing method")
@@ -53,12 +53,12 @@ func (s *TokenService) ParseToken(ctx context.Context, tokenString string) (int,
 	})
 
 	if err != nil {
-		return 0, 0, fmt.Errorf("TokenService - ParseToken: %w", err)
+		return "", 0, fmt.Errorf("TokenService - ParseToken: %w", err)
 	}
 
 	claims, ok := t.Claims.(*UserJWTClaims)
 	if !ok {
-		return 0, 0, fmt.Errorf("invalid claims type")
+		return "", 0, fmt.Errorf("invalid claims type")
 	}
 
 	return claims.UserId, claims.UserRole, nil

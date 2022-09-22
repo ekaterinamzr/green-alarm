@@ -19,7 +19,7 @@ type CreateIncidentRequest struct {
 }
 
 type CreateIncidentResponse struct {
-	Id int `json:"id"`
+	Id string `json:"id"`
 }
 
 type GetAllIncidentsResponse struct {
@@ -35,11 +35,11 @@ type GetIncidentsByTypeResponse struct {
 }
 
 type GetIncidentByIdRequest struct {
-	Id int `json:"id"`
+	Id string `json:"id"`
 }
 
 type GetIncidentByIdResponse struct {
-	Id               int       `json:"id"`
+	Id               string    `json:"id"`
 	Name             string    `json:"incident_name"`
 	Date             time.Time `json:"incident_date"`
 	Country          string    `json:"country"`
@@ -53,7 +53,7 @@ type GetIncidentByIdResponse struct {
 }
 
 type UpdateIncidentRequest struct {
-	Id        int       `json:"id"`
+	Id        string    `json:"id"`
 	Name      string    `json:"incident_name"`
 	Date      time.Time `json:"incident_date"`
 	Country   string    `json:"country"`
@@ -66,5 +66,5 @@ type UpdateIncidentRequest struct {
 }
 
 type DeleteIncidentRequest struct {
-	Id int `json:"id"`
+	Id string `json:"id"`
 }

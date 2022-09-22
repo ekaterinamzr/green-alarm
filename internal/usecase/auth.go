@@ -10,13 +10,13 @@ import (
 )
 
 type AuthRepository interface {
-	Create(context.Context, entity.User) (int, error)
+	Create(context.Context, entity.User) (string, error)
 	GetUser(context.Context, string, string) (*entity.User, error)
 }
 
 type TokenService interface {
-	GenerateToken(ctx context.Context, id, role int) (string, error)
-	ParseToken(context.Context, string) (id int, role int, err error)
+	GenerateToken(ctx context.Context, id string, role int) (string, error)
+	ParseToken(context.Context, string) (id string, role int, err error)
 }
 
 type AuthUseCase struct {
@@ -73,12 +73,7 @@ func (uc *AuthUseCase) SignIn(ctx context.Context, u dto.SignInRequest) (*dto.Si
 	return &dto.SignInResponse{Id: user.Id, Role: user.Role, Token: token}, err
 }
 
-func (uc *AuthUseCase) ParseToken(ctx context.Context, token string) (id int, role int, err error) {
-	return uc.token.ParseToken(ctx, token)
-}
-
-func (uc *AuthUseCase) TokenParser() func(context.Context, string) (id int, role int, err error) {
-	return func(ctx context.Context, token string) (id int, role int, err error) {
-		return uc.token.ParseToken(ctx, token)
-	}
+func (uc *AuthUseCase) ParseToken(ctx context.Context, token string) (string, int, error) {
+	id, role, err := uc.token.ParseToken(ctx, token)
+	return id, role, err
 }

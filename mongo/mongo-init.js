@@ -1,0 +1,1 @@
+db.incidents.insert({"name": "test incident"})

@@ -10,10 +10,10 @@ import (
 
 type UserRepository interface {
 	GetAll(context.Context) ([]entity.User, error)
-	GetById(context.Context, int) (*entity.User, error)
-	Update(context.Context, int, entity.User) error
-	ChangeRole(context.Context, int, int) error
-	Delete(context.Context, int) error
+	GetById(context.Context, string) (*entity.User, error)
+	Update(context.Context, string, entity.User) error
+	ChangeRole(context.Context, string, int) error
+	Delete(context.Context, string) error
 }
 
 type UserUseCase struct {

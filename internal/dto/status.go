@@ -9,7 +9,7 @@ type CreateStatusRequest struct {
 }
 
 type CreateStatusResponse struct {
-	Id int `json:"id"`
+	Id string `json:"id"`
 }
 
 type GetAllStatusesResponse struct {
@@ -17,19 +17,19 @@ type GetAllStatusesResponse struct {
 }
 
 type GetStatusByIdRequest struct {
-	Id int `json:"id"`
+	Id string `json:"id"`
 }
 
 type GetStatusByIdResponse struct {
-	Id   int    `json:"id"`
+	Id   string    `json:"id"`
 	Name string `json:"status_name"`
 }
 
 type UpdateStatusRequest struct {
-	Id   int    `json:"id"`
+	Id   string    `json:"id"`
 	Name string `json:"status_name"`
 }
 
 type DeleteStatusRequest struct {
-	Id int `json:"id"`
+	Id string `json:"id"`
 }

@@ -9,11 +9,11 @@ import (
 )
 
 type RoleRepository interface {
-	Create(context.Context, entity.UserRole) (int, error)
+	Create(context.Context, entity.UserRole) (string, error)
 	GetAll(context.Context) ([]entity.UserRole, error)
-	GetById(context.Context, int) (*entity.UserRole, error)
-	Update(context.Context, int, entity.UserRole) error
-	Delete(context.Context, int) error
+	GetById(context.Context, string) (*entity.UserRole, error)
+	Update(context.Context, string, entity.UserRole) error
+	Delete(context.Context, string) error
 }
 
 type RoleUseCase struct {

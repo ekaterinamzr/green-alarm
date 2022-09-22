@@ -64,14 +64,7 @@ func (r *incidentRoutes) getAll(c *gin.Context) {
 func (r *incidentRoutes) getById(c *gin.Context) {
 	var input dto.GetIncidentByIdRequest
 
-	id, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		r.l.Error(err, "ginhttp - incident - getById")
-		errorResponse(c, http.StatusBadRequest, "invalid id param")
-		return
-	}
-
-	input.Id = id
+	input.Id = c.Param("id")
 
 	output, err := r.uc.GetById(c.Request.Context(), input)
 	if err != nil {
@@ -114,16 +107,9 @@ func (r *incidentRoutes) update(c *gin.Context) {
 		return
 	}
 
-	id, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		r.l.Error(err, "ginhttp - incident - update")
-		errorResponse(c, http.StatusBadRequest, "invalid id param")
-		return
-	}
+	input.Id = c.Param("id")
 
-	input.Id = id
-
-	err = r.uc.Update(c.Request.Context(), input)
+	err := r.uc.Update(c.Request.Context(), input)
 	if err != nil {
 		r.l.Error(err, "ginhttp - incident - update")
 		errorResponse(c, http.StatusInternalServerError, "invalid request")
@@ -136,16 +122,9 @@ func (r *incidentRoutes) update(c *gin.Context) {
 func (r *incidentRoutes) delete(c *gin.Context) {
 	var input dto.DeleteIncidentRequest
 
-	id, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		r.l.Error(err, "ginhttp - incident - delete")
-		errorResponse(c, http.StatusBadRequest, "invalid id param")
-		return
-	}
+	input.Id = c.Param("id")
 
-	input.Id = id
-
-	err = r.uc.Delete(c.Request.Context(), input)
+	err := r.uc.Delete(c.Request.Context(), input)
 	if err != nil {
 		r.l.Error(err, "ginhttp - incident - delete")
 		errorResponse(c, http.StatusInternalServerError, "invalid request")

@@ -9,11 +9,11 @@ type GetAllUsersResponse struct {
 }
 
 type GetUserByIdRequest struct {
-	Id int `json:"id"`
+	Id string `json:"id"`
 }
 
 type GetUserByIdResponse struct {
-	Id         int    `json:"id"`
+	Id         string    `json:"id"`
 	First_name string `json:"first_name"`
 	Last_name  string `json:"last_name"`
 	Username   string `json:"username"`
@@ -23,7 +23,7 @@ type GetUserByIdResponse struct {
 }
 
 type UpdateUserRequest struct {
-	Id         int    `json:"id"`
+	Id         string    `json:"id"`
 	First_name string `json:"first_name"`
 	Last_name  string `json:"last_name"`
 	Username   string `json:"username"`
@@ -33,10 +33,10 @@ type UpdateUserRequest struct {
 }
 
 type DeleteUserRequest struct {
-	Id int `json:"id"`
+	Id string `json:"id"`
 }
 
 type ChangeRoleRequest struct {
-	Id int `json:"id"`
+	Id string `json:"id"`
 	NewRole int `json:"NewRole"`
 }

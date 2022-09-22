@@ -9,7 +9,7 @@ type CreateRoleRequest struct {
 }
 
 type CreateRoleResponse struct {
-	Id int `json:"id"`
+	Id string `json:"id"`
 }
 
 type GetAllRolesResponse struct {
@@ -17,19 +17,19 @@ type GetAllRolesResponse struct {
 }
 
 type GetRoleByIdRequest struct {
-	Id int `json:"id"`
+	Id string `json:"id"`
 }
 
 type GetRoleByIdResponse struct {
-	Id   int    `json:"id"`
+	Id string    `json:"id"`
 	Name string `json:"role_name"`
 }
 
 type UpdateRoleRequest struct {
-	Id   int    `json:"id"`
+	Id string    `json:"id"`
 	Name string `json:"role_name"`
 }
 
 type DeleteRoleRequest struct {
-	Id int `json:"id"`
+	Id string `json:"id"`
 }

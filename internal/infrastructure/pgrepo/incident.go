@@ -16,8 +16,8 @@ func NewIncidentRepository(pg *postgres.Postgres) *IncidentRepository {
 	return &IncidentRepository{pg}
 }
 
-func (r *IncidentRepository) Create(ctx context.Context, i entity.Incident) (int, error) {
-	var id int
+func (r *IncidentRepository) Create(ctx context.Context, i entity.Incident) (string, error) {
+	var id string
 	query := `	INSERT INTO 
 					incidents (
 						incident_name, 
@@ -38,7 +38,7 @@ func (r *IncidentRepository) Create(ctx context.Context, i entity.Incident) (int
 	row := r.DB.QueryRowContext(ctx, query, i.Name, i.Date, i.Country, i.Latitude, i.Longitude, i.Publication_date, i.Comment, i.Status, i.Type, i.Author)
 	err := row.Scan(&id)
 	if err != nil {
-		return 0, fmt.Errorf("pgrepo - incident - CreateIncident: %w", err)
+		return "", fmt.Errorf("pgrepo - incident - CreateIncident: %w", err)
 	}
 	return id, nil
 }
@@ -68,7 +68,7 @@ func (r *IncidentRepository) GetAll(ctx context.Context) ([]entity.Incident, err
 	return all, nil
 }
 
-func (r *IncidentRepository) GetById(ctx context.Context, id int) (*entity.Incident, error) {
+func (r *IncidentRepository) GetById(ctx context.Context, id string) (*entity.Incident, error) {
 	var incident entity.Incident
 
 	query := `	SELECT 
@@ -123,7 +123,7 @@ func (r *IncidentRepository) GetByType(ctx context.Context, requiredType int) ([
 	return incidents, nil
 }
 
-func (r *IncidentRepository) Update(ctx context.Context, id int, updated entity.Incident) error {
+func (r *IncidentRepository) Update(ctx context.Context, id string, updated entity.Incident) error {
 	query := `	UPDATE 
 					incidents 
 				SET 
@@ -159,7 +159,7 @@ func (r *IncidentRepository) Update(ctx context.Context, id int, updated entity.
 	return nil
 }
 
-func (r *IncidentRepository) Delete(ctx context.Context, id int) error {
+func (r *IncidentRepository) Delete(ctx context.Context, id string) error {
 	query := `	DELETE 
 				FROM 
 					incidents 

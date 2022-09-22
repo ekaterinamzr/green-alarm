@@ -18,8 +18,8 @@ func NewUserRepository(pg *postgres.Postgres) *UserRepository {
 	return &UserRepository{pg}
 }
 
-func (r *UserRepository) Create(ctx context.Context, u entity.User) (int, error) {
-	var id int
+func (r *UserRepository) Create(ctx context.Context, u entity.User) (string, error) {
+	var id string
 	query := `	INSERT 
 				INTO 
 					users (
@@ -37,7 +37,7 @@ func (r *UserRepository) Create(ctx context.Context, u entity.User) (int, error)
 	row := r.DB.QueryRowContext(ctx, query, u.First_name, u.Last_name, u.Username, u.Email, u.Password, u.Role)
 	err := row.Scan(&id)
 	if err != nil {
-		return 0, fmt.Errorf("pgrepo - user - CreateUser: %w", err)
+		return "", fmt.Errorf("pgrepo - user - CreateUser: %w", err)
 	}
 	return id, nil
 }
@@ -63,7 +63,6 @@ func (r *UserRepository) GetUser(ctx context.Context, username, password string)
 	return &user, nil
 }
 
-
 func (r *UserRepository) GetAll(ctx context.Context) ([]entity.User, error) {
 	var all []entity.User
 
@@ -85,7 +84,7 @@ func (r *UserRepository) GetAll(ctx context.Context) ([]entity.User, error) {
 	return all, nil
 }
 
-func (r *UserRepository) GetById(ctx context.Context, id int) (*entity.User, error) {
+func (r *UserRepository) GetById(ctx context.Context, id string) (*entity.User, error) {
 	var user entity.User
 
 	query := `	SELECT 
@@ -109,7 +108,7 @@ func (r *UserRepository) GetById(ctx context.Context, id int) (*entity.User, err
 	return &user, nil
 }
 
-func (r *UserRepository) Update(ctx context.Context, id int, updated entity.User) error {
+func (r *UserRepository) Update(ctx context.Context, id string, updated entity.User) error {
 	query := `	UPDATE 
 					users 
 				SET 
@@ -139,7 +138,7 @@ func (r *UserRepository) Update(ctx context.Context, id int, updated entity.User
 	return nil
 }
 
-func (r *UserRepository) ChangeRole(ctx context.Context, id, newRole int) error {
+func (r *UserRepository) ChangeRole(ctx context.Context, id string, newRole int) error {
 	query := `	UPDATE 
 					users 
 				SET 
@@ -159,7 +158,7 @@ func (r *UserRepository) ChangeRole(ctx context.Context, id, newRole int) error 
 	return nil
 }
 
-func (r *UserRepository) Delete(ctx context.Context, id int) error {
+func (r *UserRepository) Delete(ctx context.Context, id string) error {
 	query := `	DELETE 
 				FROM 
 					users 
@@ -174,4 +173,3 @@ func (r *UserRepository) Delete(ctx context.Context, id int) error {
 
 	return nil
 }
-

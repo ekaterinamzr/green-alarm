@@ -13,7 +13,7 @@ type Auth interface {
 	SignUp(context.Context, dto.SignUpRequest) (*dto.SignUpResponse, error)
 	SignIn(context.Context, dto.SignInRequest) (*dto.SignInResponse, error)
 
-	ParseToken(context.Context, string) (id int, role int, err error)
+	ParseToken(context.Context, string) (id string, role int, err error)
 }
 
 type Incident interface {

@@ -2,7 +2,6 @@ package ginhttp
 
 import (
 	"net/http"
-	"strconv"
 
 	"github.com/ekaterinamzr/green-alarm/internal/dto"
 	"github.com/ekaterinamzr/green-alarm/pkg/logger"
@@ -41,14 +40,7 @@ func (r *userRoutes) getAll(c *gin.Context) {
 func (r *userRoutes) getById(c *gin.Context) {
 	var input dto.GetUserByIdRequest
 
-	id, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		r.l.Error(err, "ginhttp - user - getById")
-		errorResponse(c, http.StatusBadRequest, "invalid id param")
-		return
-	}
-
-	input.Id = id
+	input.Id = c.Param("id")
 
 	output, err := r.uc.GetById(c.Request.Context(), input)
 	if err != nil {
@@ -69,16 +61,9 @@ func (r *userRoutes) update(c *gin.Context) {
 		return
 	}
 
-	id, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		r.l.Error(err, "ginhttp - user - update")
-		errorResponse(c, http.StatusBadRequest, "invalid id param")
-		return
-	}
+	input.Id = c.Param("id")
 
-	input.Id = id
-
-	err = r.uc.Update(c.Request.Context(), input)
+	err := r.uc.Update(c.Request.Context(), input)
 	if err != nil {
 		r.l.Error(err, "ginhttp - user - update")
 		errorResponse(c, http.StatusInternalServerError, "invalid request")
@@ -97,16 +82,9 @@ func (r *userRoutes) changeRole(c *gin.Context) {
 		return
 	}
 
-	id, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		r.l.Error(err, "ginhttp - user - updateRole")
-		errorResponse(c, http.StatusBadRequest, "invalid id param")
-		return
-	}
+	input.Id = c.Param("id")
 
-	input.Id = id
-
-	err = r.uc.ChangeRole(c.Request.Context(), input)
+	err := r.uc.ChangeRole(c.Request.Context(), input)
 	if err != nil {
 		r.l.Error(err, "ginhttp - user - makeDefault")
 		errorResponse(c, http.StatusInternalServerError, "invalid request")
@@ -119,16 +97,9 @@ func (r *userRoutes) changeRole(c *gin.Context) {
 func (r *userRoutes) delete(c *gin.Context) {
 	var input dto.DeleteUserRequest
 
-	id, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		r.l.Error(err, "ginhttp - user - delete")
-		errorResponse(c, http.StatusBadRequest, "invalid id param")
-		return
-	}
+	input.Id = c.Param("id")
 
-	input.Id = id
-
-	err = r.uc.Delete(c.Request.Context(), input)
+	err := r.uc.Delete(c.Request.Context(), input)
 	if err != nil {
 		r.l.Error(err, "ginhttp - user - delete")
 		errorResponse(c, http.StatusInternalServerError, "invalid request")

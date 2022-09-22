@@ -9,7 +9,7 @@ type CreateTypeRequest struct {
 }
 
 type CreateTypeResponse struct {
-	Id int `json:"id"`
+	Id string `json:"id"`
 }
 
 type GetAllTypesResponse struct {
@@ -17,19 +17,19 @@ type GetAllTypesResponse struct {
 }
 
 type GetTypeByIdRequest struct {
-	Id int `json:"id"`
+	Id string `json:"id"`
 }
 
 type GetTypeByIdResponse struct {
-	Id   int    `json:"id"`
+	Id   string    `json:"id"`
 	Name string `json:"type_name"`
 }
 
 type UpdateTypeRequest struct {
-	Id   int    `json:"id"`
+	Id   string    `json:"id"`
 	Name string `json:"type_name"`
 }
 
 type DeleteTypeRequest struct {
-	Id int `json:"id"`
+	Id string `json:"id"`
 }

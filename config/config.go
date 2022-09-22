@@ -14,7 +14,7 @@ type DatabaseConfig struct {
 	Name     string
 	User     string
 	Password string
-	URL      string
+	URI      string
 }
 
 type ServerConfig struct {
@@ -27,11 +27,16 @@ type AuthConfig struct {
 	SigningKey string
 }
 
+type MongoDBConfig struct {
+	URI string
+}
+
 type Config struct {
 	Logger   LoggerConfig
 	Database DatabaseConfig
 	Server   ServerConfig
 	Auth     AuthConfig
+	MongoDB MongoDBConfig
 }
 
 func Load() (*Config, error) {

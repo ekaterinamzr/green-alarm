@@ -13,10 +13,10 @@ const (
 )
 
 type middleware struct {
-	parseToken func(context.Context, string) (id int, role int, err error)
+	parseToken func(context.Context, string) (id string, role int, err error)
 }
 
-func newMiddleware(parseToken func(context.Context, string) (id int, role int, err error)) *middleware{
+func newMiddleware(parseToken func(context.Context, string) (id string, role int, err error)) *middleware {
 	return &middleware{parseToken: parseToken}
 }
 

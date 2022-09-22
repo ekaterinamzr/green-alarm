@@ -20,7 +20,6 @@ CREATE TABLE Incidents (
   country varchar NOT NULL,
   latitude double precision,
   longitude double precision,
-  -- coordinate geography NOT NULL,
   publication_date date NOT NULL,
   comment text,
   incident_status int NOT NULL,

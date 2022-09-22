@@ -7,12 +7,12 @@ const (
 )
 
 type UserRole struct {
-	Id               int       `json:"id" db:"id"`
-	Name             string    `json:"role_name" db:"role_name"`
+	Id   string `json:"id" db:"id"`
+	Name string `json:"role_name" db:"role_name"`
 }
 
 type User struct {
-	Id         int    `json:"id" db:"id"`
+	Id         string `json:"id" db:"id"`
 	First_name string `json:"first_name" db:"first_name"`
 	Last_name  string `json:"last_name" db:"last_name"`
 	Username   string `json:"username" db:"username"`

@@ -9,11 +9,11 @@ import (
 )
 
 type TypeRepository interface {
-	Create(context.Context, entity.IncidentType) (int, error)
+	Create(context.Context, entity.IncidentType) (string, error)
 	GetAll(context.Context) ([]entity.IncidentType, error)
-	GetById(context.Context, int) (*entity.IncidentType, error)
-	Update(context.Context, int, entity.IncidentType) error
-	Delete(context.Context, int) error
+	GetById(context.Context, string) (*entity.IncidentType, error)
+	Update(context.Context, string, entity.IncidentType) error
+	Delete(context.Context, string) error
 }
 
 type TypeUseCase struct {
@@ -64,7 +64,7 @@ func (uc *TypeUseCase) GetById(ctx context.Context, data dto.GetTypeByIdRequest)
 func (uc *TypeUseCase) Update(ctx context.Context, data dto.UpdateTypeRequest) error {
 	err := uc.repo.Update(ctx, data.Id, entity.IncidentType{
 		Id:   data.Id,
-		Name: data.Name,})
+		Name: data.Name})
 
 	if err != nil {
 		return fmt.Errorf("TypeUseCase - Update - uc.repo.Update: %w", err)

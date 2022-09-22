@@ -9,7 +9,7 @@ type SignUpRequest struct {
 }
 
 type SignUpResponse struct {
-	Id int `json:"id"`
+	Id string `json:"id"`
 }
 
 type SignInRequest struct {
@@ -18,7 +18,7 @@ type SignInRequest struct {
 }
 
 type SignInResponse struct {
-	Id    int    `json:"id"`
+	Id    string    `json:"id"`
 	Token string `json:"token"`
 	Role  int    `json:"role"`
 }

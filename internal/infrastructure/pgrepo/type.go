@@ -16,8 +16,8 @@ func NewTypeRepository(pg *postgres.Postgres) *TypeRepository {
 	return &TypeRepository{pg}
 }
 
-func (r *TypeRepository) Create(ctx context.Context, t entity.IncidentType) (int, error) {
-	var id int
+func (r *TypeRepository) Create(ctx context.Context, t entity.IncidentType) (string, error) {
+	var id string
 	query := `	INSERT INTO 
 					types (
 						type_name) 
@@ -29,7 +29,7 @@ func (r *TypeRepository) Create(ctx context.Context, t entity.IncidentType) (int
 	row := r.DB.QueryRowContext(ctx, query, t.Name)
 	err := row.Scan(&id)
 	if err != nil {
-		return 0, fmt.Errorf("pgrepo - type - CreateType: %w", err)
+		return "", fmt.Errorf("pgrepo - type - CreateType: %w", err)
 	}
 	return id, nil
 }
@@ -50,7 +50,7 @@ func (r *TypeRepository) GetAll(ctx context.Context) ([]entity.IncidentType, err
 	return all, nil
 }
 
-func (r *TypeRepository) GetById(ctx context.Context, id int) (*entity.IncidentType, error) {
+func (r *TypeRepository) GetById(ctx context.Context, id string) (*entity.IncidentType, error) {
 	var t entity.IncidentType
 
 	query := `	SELECT 
@@ -69,7 +69,7 @@ func (r *TypeRepository) GetById(ctx context.Context, id int) (*entity.IncidentT
 	return &t, nil
 }
 
-func (r *TypeRepository) Update(ctx context.Context, id int, updated entity.IncidentType) error {
+func (r *TypeRepository) Update(ctx context.Context, id string, updated entity.IncidentType) error {
 	query := `	UPDATE 
 					types 
 				SET 
@@ -86,7 +86,7 @@ func (r *TypeRepository) Update(ctx context.Context, id int, updated entity.Inci
 	return nil
 }
 
-func (r *TypeRepository) Delete(ctx context.Context, id int) error {
+func (r *TypeRepository) Delete(ctx context.Context, id string) error {
 	query := `	DELETE 
 				FROM 
 					types 

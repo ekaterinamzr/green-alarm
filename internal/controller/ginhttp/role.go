@@ -2,7 +2,6 @@ package ginhttp
 
 import (
 	"net/http"
-	"strconv"
 
 	"github.com/ekaterinamzr/green-alarm/internal/dto"
 	"github.com/ekaterinamzr/green-alarm/pkg/logger"
@@ -60,14 +59,7 @@ func (r *roleRoutes) getAll(c *gin.Context) {
 func (r *roleRoutes) getById(c *gin.Context) {
 	var input dto.GetRoleByIdRequest
 
-	id, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		r.l.Error(err, "ginhttp - role - getById")
-		errorResponse(c, http.StatusBadRequest, "invalid id param")
-		return
-	}
-
-	input.Id = id
+	input.Id = c.Param("id")
 
 	output, err := r.uc.GetById(c.Request.Context(), input)
 	if err != nil {
@@ -88,16 +80,9 @@ func (r *roleRoutes) update(c *gin.Context) {
 		return
 	}
 
-	id, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		r.l.Error(err, "ginhttp - role - update")
-		errorResponse(c, http.StatusBadRequest, "invalid id param")
-		return
-	}
+	input.Id = c.Param("id")
 
-	input.Id = id
-
-	err = r.uc.Update(c.Request.Context(), input)
+	err := r.uc.Update(c.Request.Context(), input)
 	if err != nil {
 		r.l.Error(err, "ginhttp - role - update")
 		errorResponse(c, http.StatusInternalServerError, "invalid request")
@@ -110,16 +95,9 @@ func (r *roleRoutes) update(c *gin.Context) {
 func (r *roleRoutes) delete(c *gin.Context) {
 	var input dto.DeleteRoleRequest
 
-	id, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		r.l.Error(err, "ginhttp - role - delete")
-		errorResponse(c, http.StatusBadRequest, "invalid id param")
-		return
-	}
+	input.Id = c.Param("id")
 
-	input.Id = id
-
-	err = r.uc.Delete(c.Request.Context(), input)
+	err := r.uc.Delete(c.Request.Context(), input)
 	if err != nil {
 		r.l.Error(err, "ginhttp - role - delete")
 		errorResponse(c, http.StatusInternalServerError, "invalid request")
