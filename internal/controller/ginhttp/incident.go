@@ -1,6 +1,7 @@
 package ginhttp
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -36,6 +37,9 @@ func (r *incidentRoutes) create(c *gin.Context) {
 		errorResponse(c, http.StatusBadRequest, "invalid request body")
 		return
 	}
+
+	fmt.Println("c.BindJSON result:")
+	fmt.Println(input)
 
 	// input.Author = c.GetInt("userId")
 	input.Author = 1

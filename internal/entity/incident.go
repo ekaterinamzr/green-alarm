@@ -1,6 +1,6 @@
 package entity
 
-import "time"
+import "github.com/ekaterinamzr/green-alarm/pkg/date"
 
 // Type
 const (
@@ -34,11 +34,11 @@ type IncidentStatus struct {
 type Incident struct {
 	Id               string    `json:"id" bson:"_id" db:"id"`
 	Name             string    `json:"incident_name" bson:"incident_name" db:"incident_name"`
-	Date             time.Time `json:"incident_date" bson:"incident_date" db:"incident_date" time_format:"2006-01-02"`
+	Date             date.CustomDate `json:"incident_date" bson:"incident_date" db:"incident_date" time_format:"2006-01-02"`
 	Country          string    `json:"country" bson:"country" db:"country"`
 	Latitude         float64   `json:"latitude" bson:"latitude" db:"latitude"`
 	Longitude        float64   `json:"longitude" bson:"longitude" db:"longitude"`
-	Publication_date time.Time `json:"publication_date" bson:"publication_date" db:"publication_date" time_format:"2006-01-02"`
+	Publication_date date.CustomDate `json:"publication_date" bson:"publication_date" db:"publication_date" time_format:"2006-01-02"`
 	Comment          string    `json:"comment" bson:"comment" db:"comment"`
 	Status           int       `json:"incident_status" bson:"incident_status" db:"incident_status"`
 	Type             int       `json:"incident_type" bson:"incident_type" db:"incident_type"`
