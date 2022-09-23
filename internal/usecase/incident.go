@@ -3,10 +3,10 @@ package usecase
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/ekaterinamzr/green-alarm/internal/dto"
 	"github.com/ekaterinamzr/green-alarm/internal/entity"
-	"github.com/ekaterinamzr/green-alarm/pkg/date"
 )
 
 type IncidentRepository interface {
@@ -36,7 +36,7 @@ func (uc *IncidentUseCase) Create(ctx context.Context, data dto.CreateIncidentRe
 		Country:          data.Country,
 		Latitude:         data.Latitude,
 		Longitude:        data.Longitude,
-		Publication_date: date.Today(),
+		Publication_date: time.Now(),
 		Comment:          data.Comment,
 		Status:           entity.Unconfirmed,
 		Type:             data.Type,

@@ -1,20 +1,21 @@
 package dto
 
 import (
+	"time"
+
 	"github.com/ekaterinamzr/green-alarm/internal/entity"
-	"github.com/ekaterinamzr/green-alarm/pkg/date"
 )
 
 type CreateIncidentRequest struct {
-	Name      string          `json:"incident_name"`
-	Date      date.CustomDate //`json:"incident_date`
-	Country   string          `json:"country"`
-	Latitude  float64         `json:"latitude,string"`
-	Longitude float64         `json:"longitude,string"`
-	Comment   string          `json:"comment"`
-	Status    int             `json:"incident_status,string"`
-	Type      int             `json:"incident_type,string"`
-	Author    int             `json:"author,string"`
+	Name      string    `json:"incident_name"`
+	Date      time.Time //`json:"incident_date`
+	Country   string    `json:"country"`
+	Latitude  float64   `json:"latitude,string"`
+	Longitude float64   `json:"longitude,string"`
+	Comment   string    `json:"comment"`
+	Status    int       `json:"incident_status,string"`
+	Type      int       `json:"incident_type,string"`
+	Author    int       `json:"author,string"`
 }
 
 type CreateIncidentResponse struct {
@@ -38,30 +39,30 @@ type GetIncidentByIdRequest struct {
 }
 
 type GetIncidentByIdResponse struct {
-	Id               string          `json:"id"`
-	Name             string          `json:"incident_name"`
-	Date             date.CustomDate `json:"incident_date"`
-	Country          string          `json:"country"`
-	Latitude         float64         `json:"latitude,string"`
-	Longitude        float64         `json:"longitude,string"`
-	Publication_date date.CustomDate `json:"publication_date"`
-	Comment          string          `json:"comment"`
-	Status           int             `json:"incident_status,string"`
-	Type             int             `json:"incident_type,string"`
-	Author           int             `json:"author,string"`
+	Id               string    `json:"id"`
+	Name             string    `json:"incident_name"`
+	Date             time.Time `json:"incident_date"`
+	Country          string    `json:"country"`
+	Latitude         float64   `json:"latitude,string"`
+	Longitude        float64   `json:"longitude,string"`
+	Publication_date time.Time `json:"publication_date"`
+	Comment          string    `json:"comment"`
+	Status           int       `json:"incident_status,string"`
+	Type             int       `json:"incident_type,string"`
+	Author           int       `json:"author,string"`
 }
 
 type UpdateIncidentRequest struct {
-	Id        string          `json:"id"`
-	Name      string          `json:"incident_name"`
-	Date      date.CustomDate `json:"incident_date"`
-	Country   string          `json:"country"`
-	Latitude  float64         `json:"latitude,string"`
-	Longitude float64         `json:"longitude,string"`
-	Comment   string          `json:"comment"`
-	Status    int             `json:"incident_status,string"`
-	Type      int             `json:"incident_type,string"`
-	Author    int             `json:"author,string"`
+	Id        string    `json:"id"`
+	Name      string    `json:"incident_name"`
+	Date      time.Time `json:"incident_date"`
+	Country   string    `json:"country"`
+	Latitude  float64   `json:"latitude,string"`
+	Longitude float64   `json:"longitude,string"`
+	Comment   string    `json:"comment"`
+	Status    int       `json:"incident_status,string"`
+	Type      int       `json:"incident_type,string"`
+	Author    int       `json:"author,string"`
 }
 
 type DeleteIncidentRequest struct {

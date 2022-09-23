@@ -8,7 +8,6 @@ import (
 
 	"github.com/ekaterinamzr/green-alarm/config"
 	"github.com/ekaterinamzr/green-alarm/internal/controller/ginhttp"
-	"github.com/ekaterinamzr/green-alarm/internal/infrastructure/mongorepo"
 	"github.com/ekaterinamzr/green-alarm/internal/infrastructure/pgrepo"
 	"github.com/ekaterinamzr/green-alarm/internal/infrastructure/token"
 	"github.com/ekaterinamzr/green-alarm/internal/usecase"
@@ -42,8 +41,8 @@ func Run(cfg *config.Config) {
 	token := token.NewTokenService(cfg.Auth.TokenTTL, cfg.Auth.SigningKey)
 
 	authUseCase := usecase.NewAuthUseCase(pgrepo.NewUserRepository(pg), token, cfg.Auth.Salt)
-	// incidentUseCase := usecase.NewIncidentUseCase(pgrepo.NewIncidentRepository(pg))
-	incidentUseCase := usecase.NewIncidentUseCase(mongorepo.NewIncidentRepository(mongo))
+	incidentUseCase := usecase.NewIncidentUseCase(pgrepo.NewIncidentRepository(pg))
+	// incidentUseCase := usecase.NewIncidentUseCase(mongorepo.NewIncidentRepository(mongo))
 
 	statusUseCase := usecase.NewStatusUseCase(pgrepo.NewStatusRepository(pg))
 	typeUseCase := usecase.NewTypeUseCase(pgrepo.NewTypeRepository(pg))
