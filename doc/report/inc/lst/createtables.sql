@@ -16,10 +16,10 @@ CREATE TABLE Roles (
 CREATE TABLE Incidents (
   id SERIAL PRIMARY KEY,
   incident_name varchar NOT NULL,
-  incident_date date NOT NULL,
+  incident_date date,
   country varchar NOT NULL,
-  latitude double precision NOT NULL,
-  longitude double precision NOT NULL,
+  latitude double precision,
+  longitude double precision,
   publication_date date NOT NULL,
   comment text,
   incident_status int NOT NULL,
@@ -41,5 +41,3 @@ ALTER TABLE Users ADD FOREIGN KEY (user_role) REFERENCES Roles (id);
 ALTER TABLE Incidents ADD FOREIGN KEY (incident_type) REFERENCES Types (id);
 ALTER TABLE Incidents ADD FOREIGN KEY (incident_status) REFERENCES Statuses (id);
 ALTER TABLE Incidents ADD FOREIGN KEY (author) REFERENCES Users (id);
-
-

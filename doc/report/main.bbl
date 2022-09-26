@@ -1,0 +1,225 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{diesel}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Режим доступа: \url{https://ria.ru/20201224/razliv-1590698352.html} (дата обращения: 13.05.2022)}
+      \field{title}{Разлив дизтоплива в Норильске стал самым масштабным на планете - РИА Новости [Электронный ресурс]}
+    \endentry
+    \entry{fires}{misc}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Режим доступа: \url{https://ria.ru/20200429/1570719017.html} (дата обращения: 13.05.2022)}
+      \field{title}{В Сибири горят более 25 тысяч гектаров леса - РИА Новости [Электронный ресурс]}
+    \endentry
+    \entry{kamchatka}{misc}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Режим доступа: \url{https://ria.ru/20201005/kamchatka-1578207502.html} (дата обращения: 13.05.2022)}
+      \field{title}{Экологическая катастрофа на Камчатке - РИА Новости [Электронный ресурс]}
+    \endentry
+    \entry{interview}{misc}{}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Режим доступа: \url{https://www.forbes.ru/forbeslife/410857-my-ostaemsya-v-plenu-sovetskih-tehnologiy-i-okazhemsya-v-glubokom-ekonomicheskom} (дата обращения: 13.05.2022)}
+      \field{title}{Эксперт Greenpeace об экологических катастрофах на Камчатке и в Норильске и их последствиях - Forbes [Электронный ресурс]}
+    \endentry
+    \entry{wwf1}{misc}{}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Режим доступа \url{https://wwf.ru/resources/news/ekologicheskaya-politika/wwf-predotvratit-ekologicheskie-katastrofy-mozhno-tolko-pri-uchastii-obshchestvennosti/} (дата обращения: 13.05.2022)}
+      \field{title}{Предотвратить экологические катастрофы можно только при участии общественности - WWF [Электронный ресурс]}
+    \endentry
+    \entry{forum}{misc}{}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Режим доступа: \url{https://idea.asi.ru.} (дата обращения: 13.05.2022)}
+      \field{title}{Сильные идеи для нового времени [Электронный ресурс]}
+    \endentry
+    \entry{wwf2}{misc}{}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Режим доступа: \url{https://wwf.ru/resources/news/Regulirovanie/wwf-rossii-i-brend-fairy-zapustili-obshchestvennyy-monitoring-avariynykh-ekologicheskikh-situatsiy-v/} (дата обращения: 13.05.2022)}
+      \field{title}{Предотвратить экологические катастрофы можно только при участии общественности - WWF [Электронный ресурс]}
+    \endentry
+    \entry{db-model}{online}{}
+      \list{language}{1}{%
+        {russian}%
+      }
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labeltitlesource}{title}
+      \field{title}{Модель баз данных}
+      \field{urlday}{16}
+      \field{urlmonth}{9}
+      \field{urlyear}{2022}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://clck.ru/323j87
+      \endverb
+      \verb{url}
+      \verb https://clck.ru/323j87
+      \endverb
+    \endentry
+    \entry{mongodb}{online}{}
+      \list{language}{1}{%
+        {russian}%
+      }
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labeltitlesource}{title}
+      \field{title}{MongoDB}
+      \field{urlday}{13}
+      \field{urlmonth}{5}
+      \field{urlyear}{2022}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.mongodb.com/
+      \endverb
+      \verb{url}
+      \verb https://www.mongodb.com/
+      \endverb
+    \endentry
+    \entry{tarantool}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Режим доступа: \url{https://www.tarantool.io/ru/} (дата обращения: 07.06.2021)}
+      \field{title}{Tarantool -- Платформа In-memory вычислений [Электронный ресурс]}
+    \endentry
+    \entry{redis}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Режим доступа: \url{https://redis.io/} (дата обращения: 07.06.2021)}
+      \field{title}{Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache, and message broker [Электронный ресурс]}
+    \endentry
+    \entry{rest-api}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Режим доступа: \url{https://www.redhat.com/en/topics/api/what-is-a-rest-api} (дата обращения: 07.06.2021)}
+      \field{title}{What is a REST API? - Red Hat [Электронный ресурс]}
+    \endentry
+    \entry{golang}{online}{}
+      \list{language}{1}{%
+        {english}%
+      }
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{title}{The Go Programming Language}
+      \field{urlday}{27}
+      \field{urlmonth}{8}
+      \field{urlyear}{2022}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://go.dev/
+      \endverb
+      \verb{url}
+      \verb https://go.dev/
+      \endverb
+    \endentry
+    \entry{sqlx}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Режим доступа: \url{https://pkg.go.dev/github.com/jmoiron/sqlx} (дата обращения: 16.05.2022)}
+      \field{title}{Go sqlx documentation [Электронный ресурс]}
+    \endentry
+    \entry{gosql}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Режим доступа: \url{https://pkg.go.dev/database/sql} (дата обращения: 13.05.2022)}
+      \field{title}{Go sql documentation [Электронный ресурс]}
+    \endentry
+    \entry{pq}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Режим доступа: \url{https://pkg.go.dev/github.com/lib/pq} (дата обращения: 13.05.2022)}
+      \field{title}{Go pq documentation [Электронный ресурс]}
+    \endentry
+    \entry{gin}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Режим доступа: \url{https://pkg.go.dev/github.com/gin-gonic/gin} (дата обращения: 07.06.2022)}
+      \field{title}{Go Gin documentation [Электронный ресурс]}
+    \endentry
+    \entry{html}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Режим доступа: \url{https://developer.mozilla.org/en-US/docs/Web/HTML} (дата обращения: 07.06.2022)}
+      \field{title}{HTML documentation [Электронный ресурс]}
+    \endentry
+    \entry{js}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Режим доступа: \url{https://developer.mozilla.org/en-US/docs/Web/JavaScript} (дата обращения: 07.06.2022)}
+      \field{title}{JavaScript documentation [Электронный ресурс]}
+    \endentry
+    \entry{map-api}{misc}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Режим доступа: \url{https://yandex.ru/dev/maps/?p=realty} (дата обращения: 08.06.2022)}
+      \field{title}{API Яндекс Карт [Электронный ресурс]}
+    \endentry
+    \entry{ubuntu}{misc}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Режим доступа: \url{https://ubuntu.com/}}
+      \field{note}{Дата обращения: 14.09.2021}
+      \field{title}{Ubuntu: Enterprise Open Source and Linux [Электронный ресурс]}
+    \endentry
+    \entry{linux}{misc}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Режим доступа: \url{https://linux.org}}
+      \field{note}{Дата обращения: 14.09.2021}
+      \field{title}{Linux -- Getting Started [Электронный ресурс]}
+    \endentry
+    \entry{amd}{misc}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Режим доступа: \url{https://www.amd.com/ru/products/apu/amd-ryzen-7-3700u}}
+      \field{note}{Дата обращения: 14.09.2020}
+      \field{title}{Мобильный процессор AMD Ryzen™ 7 3700U с графикой Radeon™ RX Vega 10 [Электронный ресурс]}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

@@ -100,7 +100,7 @@ func (r *IncidentRepository) GetByType(ctx context.Context, requiredType int) ([
 
 func (r *IncidentRepository) Update(ctx context.Context, id string, updated entity.Incident) error {
 	collection := r.DB.Database("greenalarm").Collection("incidents")
-
+	
 	update := bson.D{{Key: "$set", Value: bson.D{
 		{Key: "incident_name", Value: updated.Name},
 		{Key: "incident_date", Value: updated.Date},
@@ -117,12 +117,10 @@ func (r *IncidentRepository) Update(ctx context.Context, id string, updated enti
 	if err != nil {
 		return fmt.Errorf("mongorepo - incident - Update: %w", err)
 	}
-
 	_, err = collection.UpdateByID(ctx, objId, update)
 	if err != nil {
 		return fmt.Errorf("mongorepo - incident - Update: %w", err)
 	}
-
 	return nil
 }
 

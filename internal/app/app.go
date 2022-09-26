@@ -13,7 +13,6 @@ import (
 	"github.com/ekaterinamzr/green-alarm/internal/usecase"
 	"github.com/ekaterinamzr/green-alarm/pkg/httpserver"
 	"github.com/ekaterinamzr/green-alarm/pkg/logger"
-	"github.com/ekaterinamzr/green-alarm/pkg/mongo"
 	"github.com/ekaterinamzr/green-alarm/pkg/postgres"
 	"github.com/gin-gonic/gin"
 )
@@ -30,13 +29,13 @@ func Run(cfg *config.Config) {
 
 	defer pg.Close()
 
-	mongo, err := mongo.New(cfg.MongoDB.URI)
-	if err != nil {
-		l.Fatal(err, "app - Run - mongo.New")
-	}
-	l.Debug("Connected to MongoDB!")
+	// mongo, err := mongo.New(cfg.MongoDB.URI)
+	// if err != nil {
+	// 	l.Fatal(err, "app - Run - mongo.New")
+	// }
+	// l.Debug("Connected to MongoDB!")
 
-	defer mongo.Close()
+	// defer mongo.Close()
 
 	token := token.NewTokenService(cfg.Auth.TokenTTL, cfg.Auth.SigningKey)
 

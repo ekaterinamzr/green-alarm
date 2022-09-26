@@ -1,0 +1,42 @@
+\begin{appendices}
+    \chapter{SQL-скрипты}
+
+ 	В Листингах \ref{lst:sql-1}-\ref{lst:sql-7} представлены SQL-скрипты создания базы данных, создания таблиц, установки ограничений, создания ролевой модели, создания триггера, наполнения базы данных из .csv файлов..
+    \listingfile{createdb.sql}{sql-1}{SQL}{Скрипт создания базы данных.}{}
+    \listingfile{createtables.sql}{sql-2}{SQL}{Скрипт создания таблиц базы данных. Часть 1}{linerange={1-28}}
+    \listingfile{createtables.sql}{sql-3}{SQL}{Скрипт создания таблиц базы данных. Часть 2}{linerange={30-43}}
+    \listingfile{createtrigger.sql}{sql-4}{SQL}{Скрипт создания триггера.}{}
+    \listingfile{createroles.sql}{sql-5}{SQL}{Скрипт создания ролевой модели базы данных.}{}
+    \listingfile{setconstraints.sql}{sql-6}{SQL}{Скрипт установки ограничений базы данных.}{}
+    %\listingfile{insert.sql}{sql-7}{SQL}{Скрипт наполнения базы данных из .csv файлов.}{}
+    
+    \chapter{Паттерн "Репозиторий" PostgreSQL}
+    
+    В Листингах \ref{lst:repo-1}-\ref{lst:repo-4} представлена реализация паттерна "Репозиторий" для доступа к данным PostgreSQL на примере сущности Incidents.
+    \listingfile{repo.go}{repo-1}{Go}{Слой доступа к данным PostgreSQL. Часть 1}{linerange={1-38}}
+    \listingfile{repo.go}{repo-2}{Go}{Слой доступа к данным PostgreSQL. Часть 2}{linerange={39-84}}
+    \listingfile{repo.go}{repo-3}{Go}{Слой доступа к данным PostgreSQL. Часть 3}{linerange={85-130}}
+    \listingfile{repo.go}{repo-4}{Go}{Слой доступа к данным PostgreSQL. Часть 4}{linerange={131-176}}
+    
+    \chapter{Паттерн "Репозиторий" MongoDB}
+    
+    В Листингах \ref{lst:mongorepo-1}-\ref{lst:mongorepo-4} представлена реализация паттерна "Репозиторий" для доступа к данным MongoDB для проведения исследования.
+    \listingfile{mongorepo.go}{mongorepo-1}{Go}{Слой доступа к данным MongoDB. Часть 1}{linerange={1-38}}
+    \listingfile{mongorepo.go}{mongorepo-2}{Go}{Слой доступа к данным MongoDB. Часть 2}{linerange={39-80}}
+    \listingfile{mongorepo.go}{mongorepo-3}{Go}{Слой доступа к данным MongoDB. Часть 3}{linerange={82-124}}
+    \listingfile{mongorepo.go}{mongorepo-4}{Go}{Слой доступа к данным MongoDB. Часть 4}{linerange={127-143}}
+    \clearpage
+    
+    \chapter{Проведение исследования}
+    
+    В Листингах \ref{lst:research-1}-\ref{lst:research-4} представлен код проведения исследования.
+    \listingfile{research.go}{research-1}{Go}{Проведение исследования. Часть 1}{linerange={1-38}}
+    \listingfile{research.go}{research-2}{Go}{Проведение исследования. Часть 2}{linerange={39-89}}
+    \listingfile{research.go}{research-3}{Go}{Проведение исследования. Часть 3}{linerange={91-140}}
+    \listingfile{research.go}{research-4}{Go}{Проведение исследования. Часть 4}{linerange={141-190}}
+    
+    \chapter{Web-интерфейс}
+    Рисунок \ref{img:web} демонстрирует пользовательский Web-интерфейс. 
+    \imgw{web}{h!}{0.7\textwidth}{Web-интерфейс}
+       
+\end{appendices}

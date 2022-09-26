@@ -1,0 +1,156 @@
+\chapter{Конструкторская часть}
+В данном разделе будет спроектирована базы данных.
+
+\section{Проектирование базы данных}
+Для основной логики приложения была спроектирована база данных, представленная в виде ER-модели в нотации Мартина.  
+
+\imgw{er}{h!}{1.0\textwidth}{ER-модель в нотации Мартина}
+
+База данных будет состоять из следующих сущностей:
+\begin{enumerate}
+\item Users -- пользователи;
+\item Roles -- роли пользователя;
+\item Incidents -- экологические инциденты;
+\item Statuses -- статусы экологических инцидентов;
+\item Types -- типы экологических инцидентов.
+\end{enumerate}
+
+\newpage
+\noindent\textbf{Сущность Users}
+
+Сущность Users содержит информацию о пользователях:
+\begin{table}[!ht]
+    \caption{Описание полей таблицы \texttt{Users}}
+    \label{tbl:users}
+    \begin{center}
+        \begin{tabular}{|p{0.2\textwidth}p{0.6\textwidth}|}
+            \hline
+            \textbf{Поле} & \textbf{Значение} \\\hline
+            \texttt{id} & Уникальный идентификатор \\\hline
+            \texttt{first\_name} & Имя\\\hline
+            \texttt{last\_name} & Фамилия \\\hline
+            \texttt{username} & Псевдоним \\\hline
+            \texttt{email} & Адресс электронной почты \\\hline
+            \texttt{user\_password} & Хешированный пароль \\\hline
+            \texttt{user\_role} & Роль \\\hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+\noindent\textbf{Сущность Incidents}
+
+Сущность Incidents содержит информацию об экологических инцидентах:
+\begin{table}[!ht]
+    \caption{Описание полей таблицы \texttt{Incidents}}
+    \label{tbl:incidents}
+    \begin{center}
+        \begin{tabular}{|p{0.3\textwidth}p{0.6\textwidth}|}
+            \hline
+            \textbf{Поле} & \textbf{Значение} \\\hline
+            \texttt{id} & Уникальный идентификатор \\\hline
+            \texttt{incident\_name} & Название (краткое описание) \\\hline
+            \texttt{incident\_date} & Дата\\\hline
+            \texttt{country} & Страна \\\hline
+            \texttt{latitude} & Широта \\\hline
+            \texttt{longitude} & Долгота \\\hline
+            \texttt{publication\_date} & Дата публикации \\\hline
+            \texttt{comment} & Комментарий\\\hline
+            \texttt{incident\_status} & Статус \\\hline
+            \texttt{incident\_type} & Тип \\\hline
+            \texttt{author} & Пользователь, опубликовавший запись об инциденте \\\hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+\newpage
+
+\noindent\textbf{Сущность Roles}
+
+Сущность Roles содержит информацию о существующих в системе ролях пользователй:
+\begin{table}[!ht]
+	\caption{Описание полей таблицы \texttt{Roles}}
+	\label{tbl:roles}
+	\begin{center}
+		\begin{tabular}{|p{0.2\textwidth}p{0.6\textwidth}|}
+			\hline
+			\textbf{Поле} & \textbf{Значение} \\\hline
+			\texttt{id} & Уникальный идентификатор. \\\hline
+			\texttt{role\_name} & Название. \\\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\noindent\textbf{Сущность Statuses}
+
+Сущность Statuses содержит информацию о существующих в системе статусах инцидентов:
+\begin{table}[!ht]
+	\caption{Описание полей таблицы \texttt{Statuses}}
+	\label{tbl:statuses}
+	\begin{center}
+		\begin{tabular}{|p{0.2\textwidth}p{0.6\textwidth}|}
+			\hline
+			\textbf{Поле} & \textbf{Значение} \\\hline
+			\texttt{id} & Уникальный идентификатор \\\hline
+			\texttt{role\_name} & Название \\\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\noindent\textbf{Сущность Types}
+
+Сущность Types содержит информацию о существующих в системе типах инцидентов:
+\begin{table}[!ht]
+	\caption{Описание полей таблицы \texttt{Types}}
+	\label{tbl:types}
+	\begin{center}
+		\begin{tabular}{|p{0.2\textwidth}p{0.6\textwidth}|}
+			\hline
+			\textbf{Поле} & \textbf{Значение} \\\hline
+			\texttt{id} & Уникальный идентификатор \\\hline
+			\texttt{role\_name} & Название \\\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\newpage
+\noindent\textbf{Внешние ключи}
+
+\begin{itemize}
+\item В Таблице Users поле user\_role ссылается на поле id таблицы Roles;
+\item В Таблице Incidents 
+	\begin{itemize}
+		\item поле incident\_type ссылается на поле id таблицы Types;
+		\item поле incident\_status ссылается на поле id таблицы Statuses;
+		\item поле author ссылается на поле id таблицы Users.
+	\end{itemize}
+\end{itemize}
+
+\noindent\textbf{Ролевая модель}
+
+В базе данных существуют четыре роли:
+\begin{enumerate}
+\item Администратор -- имеет доступ к всем таблицам, доступны все операции над ними;
+\item Модератор -- имеет доступ к таблицам Incidents, Users; над таблицами доступны операции: SELECT, INSERT, UPDATE, DELETE;
+\item Авторизированный пользователь -- доступ к таблице Incidents; над таблицами доступны операции: SELECT, INSERT; 
+\item Гость -- доступны операция SELECT над таблицей Incidents и операция INSERT над таблицей Users.
+\end{enumerate}
+
+\noindent\textbf{Триггер}
+
+Для функционирования системы необходимо постоянное наличие в ней хотя бы одного модератора. Необходим механизм, который будет препятствовать нарушению этого условия.
+
+Для решения этой задачи можно использовать триггер, который будет срабатывать при удалении пользователя или обновлении его роли. Если операция производится с единственным модератором в системе, ее выполнение будет остановлено. 
+
+Ниже представлена схема алгоритма функции, выполняемой триггером.
+
+\imgw{trigger}{h!}{0.8\textwidth}{Схема алгоритма функции триггера check\_moderators()}
+
+\newpage
+\section*{Вывод}
+В данном разделе:
+\begin{itemize}
+\item спроектированы сущности базы данных;
+\item описаны связи сущностей с помощью внешних ключей;
+\item описана ролевая модель для разграничения доступа к базе данных;
+\item описан триггер для корректного функционирования системы.
+\end{itemize}
