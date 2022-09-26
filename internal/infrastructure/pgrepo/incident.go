@@ -35,7 +35,7 @@ func (r *IncidentRepository) Create(ctx context.Context, i entity.Incident) (int
 				RETURNING 
 					id`
 
-	row := r.DB.QueryRowContext(ctx, query, i.Name, i.Date, i.Country, i.Latitude, i.Longitude, i.Publication_date, i.Comment, i.Status, i.Type, i.Author)
+	row := r.DB.QueryRowContext(ctx, query, i.Name, i.Date, i.Country, i.Latitude, i.Longitude, i.Publication, i.Comment, i.Status, i.Type, i.Author)
 	err := row.Scan(&id)
 	if err != nil {
 		return 0, fmt.Errorf("pgrepo - incident - CreateIncident: %w", err)

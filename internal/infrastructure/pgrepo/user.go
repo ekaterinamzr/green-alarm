@@ -34,7 +34,7 @@ func (r *UserRepository) Create(ctx context.Context, u entity.User) (int, error)
 				RETURNING 
 					id`
 
-	row := r.DB.QueryRowContext(ctx, query, u.First_name, u.Last_name, u.Username, u.Email, u.Password, u.Role)
+	row := r.DB.QueryRowContext(ctx, query, u.FirstName, u.LastName, u.Username, u.Email, u.Password, u.Role)
 	err := row.Scan(&id)
 	if err != nil {
 		return 0, fmt.Errorf("pgrepo - user - CreateUser: %w", err)
@@ -62,7 +62,6 @@ func (r *UserRepository) GetUser(ctx context.Context, username, password string)
 	}
 	return &user, nil
 }
-
 
 func (r *UserRepository) GetAll(ctx context.Context) ([]entity.User, error) {
 	var all []entity.User
@@ -123,8 +122,8 @@ func (r *UserRepository) Update(ctx context.Context, id int, updated entity.User
 					id = $7`
 
 	_, err := r.DB.ExecContext(ctx, query,
-		updated.First_name,
-		updated.Last_name,
+		updated.FirstName,
+		updated.LastName,
 		updated.Username,
 		updated.Email,
 		updated.Password,
@@ -174,4 +173,3 @@ func (r *UserRepository) Delete(ctx context.Context, id int) error {
 
 	return nil
 }
-

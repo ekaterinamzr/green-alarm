@@ -45,7 +45,7 @@ func (uc *StatusUseCase) GetAll(ctx context.Context) (*dto.GetAllStatusesRespons
 		return nil, fmt.Errorf("StatusUseCase - GetAll - uc.repo.GetAll: %w", err)
 	}
 
-	return &dto.GetAllStatusesResponse{Statuss: all}, nil
+	return &dto.GetAllStatusesResponse{Statuses: all}, nil
 }
 
 func (uc *StatusUseCase) GetById(ctx context.Context, data dto.GetStatusByIdRequest) (*dto.GetStatusByIdResponse, error) {

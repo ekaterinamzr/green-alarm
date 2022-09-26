@@ -30,16 +30,16 @@ func NewIncidentUseCase(r IncidentRepository) *IncidentUseCase {
 
 func (uc *IncidentUseCase) Create(ctx context.Context, data dto.CreateIncidentRequest) (*dto.CreateIncidentResponse, error) {
 	id, err := uc.repo.Create(ctx, entity.Incident{
-		Name:             data.Name,
-		Date:             data.Date,
-		Country:          data.Country,
-		Latitude:         data.Latitude,
-		Longitude:        data.Longitude,
-		Publication_date: time.Now(),
-		Comment:          data.Comment,
-		Status:           entity.Unconfirmed,
-		Type:             data.Type,
-		Author:           data.Author,
+		Name:        data.Name,
+		Date:        data.Date,
+		Country:     data.Country,
+		Latitude:    data.Latitude,
+		Longitude:   data.Longitude,
+		Publication: time.Now(),
+		Comment:     data.Comment,
+		Status:      entity.Unconfirmed,
+		Type:        data.Type,
+		Author:      data.Author,
 	})
 
 	if err != nil {
@@ -77,17 +77,17 @@ func (uc *IncidentUseCase) GetById(ctx context.Context, data dto.GetIncidentById
 	}
 
 	return &dto.GetIncidentByIdResponse{
-		Id:               incident.Id,
-		Name:             incident.Name,
-		Date:             incident.Date,
-		Country:          incident.Country,
-		Latitude:         incident.Latitude,
-		Longitude:        incident.Longitude,
-		Publication_date: incident.Publication_date,
-		Comment:          incident.Comment,
-		Status:           entity.Unconfirmed,
-		Type:             incident.Type,
-		Author:           incident.Author}, nil
+		Id:          incident.Id,
+		Name:        incident.Name,
+		Date:        incident.Date,
+		Country:     incident.Country,
+		Latitude:    incident.Latitude,
+		Longitude:   incident.Longitude,
+		Publication: incident.Publication,
+		Comment:     incident.Comment,
+		Status:      entity.Unconfirmed,
+		Type:        incident.Type,
+		Author:      incident.Author}, nil
 }
 
 func (uc *IncidentUseCase) Update(ctx context.Context, data dto.UpdateIncidentRequest) error {

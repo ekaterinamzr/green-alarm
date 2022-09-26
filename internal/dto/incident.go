@@ -39,17 +39,17 @@ type GetIncidentByIdRequest struct {
 }
 
 type GetIncidentByIdResponse struct {
-	Id               int       `json:"id"`
-	Name             string    `json:"incident_name"`
-	Date             time.Time `json:"incident_date"`
-	Country          string    `json:"country"`
-	Latitude         float64   `json:"latitude,string"`
-	Longitude        float64   `json:"longitude,string"`
-	Publication_date time.Time `json:"publication_date"`
-	Comment          string    `json:"comment"`
-	Status           int       `json:"incident_status,string"`
-	Type             int       `json:"incident_type,string"`
-	Author           int       `json:"author,string"`
+	Id          int       `json:"id"`
+	Name        string    `json:"incident_name"`
+	Date        time.Time `json:"incident_date"`
+	Country     string    `json:"country"`
+	Latitude    float64   `json:"latitude,string"`
+	Longitude   float64   `json:"longitude,string"`
+	Publication time.Time `json:"publication_date"`
+	Comment     string    `json:"comment"`
+	Status      int       `json:"incident_status,string"`
+	Type        int       `json:"incident_type,string"`
+	Author      int       `json:"author,string"`
 }
 
 type UpdateIncidentRequest struct {

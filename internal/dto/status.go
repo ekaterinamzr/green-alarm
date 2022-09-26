@@ -13,7 +13,7 @@ type CreateStatusResponse struct {
 }
 
 type GetAllStatusesResponse struct {
-	Statuss []entity.IncidentStatus
+	Statuses []entity.IncidentStatus
 }
 
 type GetStatusByIdRequest struct {

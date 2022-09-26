@@ -13,23 +13,23 @@ type GetUserByIdRequest struct {
 }
 
 type GetUserByIdResponse struct {
-	Id         int    `json:"id"`
-	First_name string `json:"first_name"`
-	Last_name  string `json:"last_name"`
-	Username   string `json:"username"`
-	Email      string `json:"email"`
-	Password   string `json:"user_password"`
-	Role       int    `json:"user_role"`
+	Id        int    `json:"id"`
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
+	Username  string `json:"username"`
+	Email     string `json:"email"`
+	Password  string `json:"user_password"`
+	Role      int    `json:"user_role"`
 }
 
 type UpdateUserRequest struct {
-	Id         int    `json:"id"`
-	First_name string `json:"first_name"`
-	Last_name  string `json:"last_name"`
-	Username   string `json:"username"`
-	Email      string `json:"email"`
-	Password   string `json:"user_password"`
-	Role       int    `json:"user_role"`
+	Id        int    `json:"id"`
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
+	Username  string `json:"username"`
+	Email     string `json:"email"`
+	Password  string `json:"user_password"`
+	Role      int    `json:"user_role"`
 }
 
 type DeleteUserRequest struct {
@@ -37,6 +37,6 @@ type DeleteUserRequest struct {
 }
 
 type ChangeRoleRequest struct {
-	Id int `json:"id"`
+	Id      int `json:"id"`
 	NewRole int `json:"NewRole"`
 }

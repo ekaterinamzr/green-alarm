@@ -37,12 +37,12 @@ func (uc *AuthUseCase) SignUp(ctx context.Context, u dto.SignUpRequest) (*dto.Si
 	u.Password = uc.generatePasswordHash(u.Password)
 
 	id, err := uc.repo.Create(ctx, entity.User{
-		First_name: u.First_name,
-		Last_name:  u.Last_name,
-		Username:   u.Username,
-		Email:      u.Email,
-		Password:   u.Password,
-		Role:       entity.Authorised,
+		FirstName: u.FirstName,
+		LastName:  u.LastName,
+		Username:  u.Username,
+		Email:     u.Email,
+		Password:  u.Password,
+		Role:      entity.Authorised,
 	})
 
 	if err != nil {

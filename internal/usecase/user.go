@@ -44,25 +44,25 @@ func (uc *UserUseCase) GetById(ctx context.Context, data dto.GetUserByIdRequest)
 	}
 
 	return &dto.GetUserByIdResponse{
-		Id:         user.Id,
-		First_name: user.First_name,
-		Last_name:  user.Last_name,
-		Username:   user.Username,
-		Email:      user.Email,
-		Password:   user.Password,
-		Role:       user.Role,
+		Id:        user.Id,
+		FirstName: user.FirstName,
+		LastName:  user.LastName,
+		Username:  user.Username,
+		Email:     user.Email,
+		Password:  user.Password,
+		Role:      user.Role,
 	}, nil
 }
 
 func (uc *UserUseCase) Update(ctx context.Context, data dto.UpdateUserRequest) error {
 	err := uc.repo.Update(ctx, data.Id, entity.User{
-		Id:         data.Id,
-		First_name: data.First_name,
-		Last_name:  data.Last_name,
-		Username:   data.Username,
-		Email:      data.Email,
-		Password:   data.Password,
-		Role:       data.Role})
+		Id:        data.Id,
+		FirstName: data.FirstName,
+		LastName:  data.LastName,
+		Username:  data.Username,
+		Email:     data.Email,
+		Password:  data.Password,
+		Role:      data.Role})
 
 	if err != nil {
 		return fmt.Errorf("UserUseCase - Update - uc.repo.Update: %w", err)
