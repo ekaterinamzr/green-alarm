@@ -10,9 +10,9 @@ function getValue() {
 async function fetchIncidents(incidentType) {
     try {
         if (incidentType == 0) {
-            var url = "incidents/"
+            var url = "incidents"
         } else {
-            var url = `incidents/type/${incidentType}`
+            var url = `incidents?type=${incidentType}`
         }
 
         const response = await fetch(`${apiUrl}${url}`);

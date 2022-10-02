@@ -64,7 +64,7 @@ type CreateIncidentResponse struct {
 // 	Incidents []Incident
 // }
 
-type GetAllIncidentsResponse []Incident
+type GetIncidentsResponse []Incident
 
 type GetIncidentsByTypeRequest struct {
 	IncidentType int `json:"incident_type"`

@@ -74,7 +74,7 @@ func TestIncidentGetByType(t *testing.T) {
 		name string
 		repo func(ctrl *gomock.Controller) *mock.MockIncidentRepository
 		args args
-		res  *dto.GetIncidentsByTypeResponse
+		res  *dto.GetIncidentsResponse
 		err  error
 	}{
 		{
@@ -85,7 +85,7 @@ func TestIncidentGetByType(t *testing.T) {
 				return m
 			},
 			args: args{ctx: context.Background(), request: dto.GetIncidentsByTypeRequest{IncidentType: 1}},
-			res:  &dto.GetIncidentsByTypeResponse{{Type: 1}, {Type: 1}},
+			res:  &dto.GetIncidentsResponse{{Type: 1}, {Type: 1}},
 			err:  nil,
 		},
 		{
@@ -123,7 +123,7 @@ func TestIncidentGetAll(t *testing.T) {
 		name string
 		repo func(ctrl *gomock.Controller) *mock.MockIncidentRepository
 		args args
-		res  *dto.GetAllIncidentsResponse
+		res  *dto.GetIncidentsResponse
 		err  error
 	}{
 		{
@@ -134,7 +134,7 @@ func TestIncidentGetAll(t *testing.T) {
 				return m
 			},
 			args: args{ctx: context.Background()},
-			res:  &dto.GetAllIncidentsResponse{},
+			res:  &dto.GetIncidentsResponse{},
 			err:  nil,
 		},
 		{

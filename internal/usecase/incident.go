@@ -40,25 +40,25 @@ func (uc *IncidentUseCase) Create(ctx context.Context, data dto.CreateIncidentRe
 	return &dto.CreateIncidentResponse{Id: id}, nil
 }
 
-func (uc *IncidentUseCase) GetAll(ctx context.Context) (*dto.GetAllIncidentsResponse, error) {
+func (uc *IncidentUseCase) GetAll(ctx context.Context) (*dto.GetIncidentsResponse, error) {
 	all, err := uc.repo.GetAll(ctx)
 
 	if err != nil {
 		return nil, fmt.Errorf("IncidentUseCase - GetAll - uc.repo.GetAll: %w", err)
 	}
 
-	res := dto.GetAllIncidentsResponse(dto.FromIncidents(all))
+	res := dto.GetIncidentsResponse(dto.FromIncidents(all))
 	return &res, nil
 }
 
-func (uc *IncidentUseCase) GetByType(ctx context.Context, data dto.GetIncidentsByTypeRequest) (*dto.GetIncidentsByTypeResponse, error) {
+func (uc *IncidentUseCase) GetByType(ctx context.Context, data dto.GetIncidentsByTypeRequest) (*dto.GetIncidentsResponse, error) {
 	incidents, err := uc.repo.GetByType(ctx, data.IncidentType)
 
 	if err != nil {
 		return nil, fmt.Errorf("IncidentUseCase - GetByType - uc.repo.GetByType: %w", err)
 	}
 
-	res := dto.GetIncidentsByTypeResponse(dto.FromIncidents(incidents))
+	res := dto.GetIncidentsResponse(dto.FromIncidents(incidents))
 	return &res, nil
 }
 

@@ -19,11 +19,11 @@ func setStatusRoutes(handler *gin.RouterGroup, m *middleware, uc IncidentStatus,
 
 	h := handler.Group("/statuses")
 	{
-		h.GET("/", r.getAll)
-		h.POST("/", r.create)
-		h.GET(":id", r.getById)
-		h.PUT(":id", r.update)
-		h.DELETE(":id", r.delete)
+		h.GET("", r.getAll)
+		h.POST("", r.create)
+		h.GET("/:id", r.getById)
+		h.PUT("/:id", r.update)
+		h.DELETE("/:id", r.delete)
 	}
 }
 

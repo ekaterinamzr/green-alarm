@@ -19,11 +19,11 @@ func setUserRoutes(handler *gin.RouterGroup, m *middleware, uc User, l logger.Lo
 
 	h := handler.Group("/users")
 	{
-		h.GET("/", r.getAll)
-		h.GET(":id", r.getById)
-		h.PUT(":id", r.update)
-		h.PUT(":id/role", r.changeRole)
-		h.DELETE(":id", r.delete)
+		h.GET("", r.getAll)
+		h.GET("/:id", r.getById)
+		h.PUT("/:id", r.update)
+		h.PATCH("/:id", r.changeRole)
+		h.DELETE("/:id", r.delete)
 	}
 }
 

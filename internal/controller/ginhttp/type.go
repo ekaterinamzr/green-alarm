@@ -19,11 +19,11 @@ func setTypeRoutes(handler *gin.RouterGroup, m *middleware, uc IncidentType, l l
 
 	h := handler.Group("/types")
 	{
-		h.GET("/", r.getAll)
-		h.POST("/", r.create)
-		h.GET(":id", r.getById)
-		h.PUT(":id", r.update)
-		h.DELETE(":id", r.delete)
+		h.GET("", r.getAll)
+		h.POST("", r.create)
+		h.GET("/:id", r.getById)
+		h.PUT("/:id", r.update)
+		h.DELETE("/:id", r.delete)
 	}
 }
 

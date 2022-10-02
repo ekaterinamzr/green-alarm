@@ -19,12 +19,11 @@ func setIncidentRoutes(handler *gin.RouterGroup, m *middleware, uc Incident, l l
 
 	h := handler.Group("/incidents")
 	{
-		h.GET("/", r.getAll)
-		h.POST("/", r.create)
-		h.GET(":id", r.getById)
-		h.PUT(":id", r.update)
-		h.DELETE(":id", r.delete)
-		h.GET("/type/:type", r.getByType)
+		h.GET("", r.getAll)
+		h.POST("", r.create)
+		h.GET("/:id", r.getById)
+		h.PUT("/:id", r.update)
+		h.DELETE("/:id", r.delete)
 	}
 }
 
@@ -51,14 +50,29 @@ func (r *incidentRoutes) create(c *gin.Context) {
 }
 
 func (r *incidentRoutes) getAll(c *gin.Context) {
-	output, err := r.uc.GetAll(c.Request.Context())
-	if err != nil {
-		r.l.Error(err, "ginhttp - incident - getAll")
-		errorResponse(c, http.StatusInternalServerError, "invalid request body")
-		return
+	if c.Query("type") == "" {
+		output, err := r.uc.GetAll(c.Request.Context())
+		if err != nil {
+			r.l.Error(err, "ginhttp - incident - getAll")
+			errorResponse(c, http.StatusInternalServerError, "invalid request body")
+			return
+		}
+		c.JSON(http.StatusOK, output)
+	} else {
+		incidentType, err := strconv.Atoi(c.Query("type"))
+		if err != nil {
+			r.l.Error(err, "ginhttp - incident - getAll")
+			errorResponse(c, http.StatusBadRequest, "invalid type qurey value")
+			return
+		}
+		output, err := r.uc.GetByType(c.Request.Context(), dto.GetIncidentsByTypeRequest{IncidentType: incidentType})
+		if err != nil {
+			r.l.Error(err, "ginhttp - incident - getAll")
+			errorResponse(c, http.StatusInternalServerError, "invalid request body")
+			return
+		}
+		c.JSON(http.StatusOK, output)
 	}
-
-	c.JSON(http.StatusOK, output)
 }
 
 func (r *incidentRoutes) getById(c *gin.Context) {
@@ -76,28 +90,6 @@ func (r *incidentRoutes) getById(c *gin.Context) {
 	output, err := r.uc.GetById(c.Request.Context(), input)
 	if err != nil {
 		r.l.Error(err, "ginhttp - incident - getById")
-		errorResponse(c, http.StatusInternalServerError, "invalid request")
-		return
-	}
-
-	c.JSON(http.StatusOK, output)
-}
-
-func (r *incidentRoutes) getByType(c *gin.Context) {
-	var input dto.GetIncidentsByTypeRequest
-
-	incidentType, err := strconv.Atoi(c.Param("type"))
-	if err != nil {
-		r.l.Error(err, "ginhttp - incident - getByType")
-		errorResponse(c, http.StatusBadRequest, "invalid type param")
-		return
-	}
-
-	input.IncidentType = incidentType
-
-	output, err := r.uc.GetByType(c.Request.Context(), input)
-	if err != nil {
-		r.l.Error(err, "ginhttp - incident - getByType")
 		errorResponse(c, http.StatusInternalServerError, "invalid request")
 		return
 	}

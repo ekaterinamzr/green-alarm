@@ -18,11 +18,11 @@ type Auth interface {
 
 type Incident interface {
 	Create(context.Context, dto.CreateIncidentRequest) (*dto.CreateIncidentResponse, error)
-	GetAll(context.Context) (*dto.GetAllIncidentsResponse, error)
+	GetAll(context.Context) (*dto.GetIncidentsResponse, error)
 	GetById(context.Context, dto.GetIncidentByIdRequest) (*dto.GetIncidentByIdResponse, error)
 	Update(context.Context, dto.UpdateIncidentRequest) error
 	Delete(context.Context, dto.DeleteIncidentRequest) error
-	GetByType(context.Context, dto.GetIncidentsByTypeRequest) (*dto.GetIncidentsByTypeResponse, error)
+	GetByType(context.Context, dto.GetIncidentsByTypeRequest) (*dto.GetIncidentsResponse, error)
 }
 
 type IncidentType interface {
