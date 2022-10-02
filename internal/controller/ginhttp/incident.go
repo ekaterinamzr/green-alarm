@@ -58,7 +58,7 @@ func (r *incidentRoutes) getAll(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, output.Incidents)
+	c.JSON(http.StatusOK, output)
 }
 
 func (r *incidentRoutes) getById(c *gin.Context) {
@@ -102,7 +102,7 @@ func (r *incidentRoutes) getByType(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, output.Incidents)
+	c.JSON(http.StatusOK, output)
 }
 
 func (r *incidentRoutes) update(c *gin.Context) {

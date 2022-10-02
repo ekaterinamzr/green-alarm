@@ -9,15 +9,6 @@ import (
 	"github.com/ekaterinamzr/green-alarm/internal/entity"
 )
 
-type IncidentRepository interface {
-	Create(context.Context, entity.Incident) (int, error)
-	GetAll(context.Context) ([]entity.Incident, error)
-	GetById(context.Context, int) (*entity.Incident, error)
-	Update(context.Context, int, entity.Incident) error
-	Delete(context.Context, int) error
-	GetByType(context.Context, int) ([]entity.Incident, error)
-}
-
 type IncidentUseCase struct {
 	repo IncidentRepository
 }
@@ -56,7 +47,8 @@ func (uc *IncidentUseCase) GetAll(ctx context.Context) (*dto.GetAllIncidentsResp
 		return nil, fmt.Errorf("IncidentUseCase - GetAll - uc.repo.GetAll: %w", err)
 	}
 
-	return &dto.GetAllIncidentsResponse{Incidents: all}, nil
+	res := dto.GetAllIncidentsResponse(dto.FromIncidents(all))
+	return &res, nil
 }
 
 func (uc *IncidentUseCase) GetByType(ctx context.Context, data dto.GetIncidentsByTypeRequest) (*dto.GetIncidentsByTypeResponse, error) {
@@ -66,7 +58,8 @@ func (uc *IncidentUseCase) GetByType(ctx context.Context, data dto.GetIncidentsB
 		return nil, fmt.Errorf("IncidentUseCase - GetByType - uc.repo.GetByType: %w", err)
 	}
 
-	return &dto.GetIncidentsByTypeResponse{Incidents: incidents}, nil
+	res := dto.GetIncidentsByTypeResponse(dto.FromIncidents(incidents))
+	return &res, nil
 }
 
 func (uc *IncidentUseCase) GetById(ctx context.Context, data dto.GetIncidentByIdRequest) (*dto.GetIncidentByIdResponse, error) {
@@ -76,22 +69,12 @@ func (uc *IncidentUseCase) GetById(ctx context.Context, data dto.GetIncidentById
 		return nil, fmt.Errorf("IncidentUseCase - GetById - uc.repo.GetById: %w", err)
 	}
 
-	return &dto.GetIncidentByIdResponse{
-		Id:          incident.Id,
-		Name:        incident.Name,
-		Date:        incident.Date,
-		Country:     incident.Country,
-		Latitude:    incident.Latitude,
-		Longitude:   incident.Longitude,
-		Publication: incident.Publication,
-		Comment:     incident.Comment,
-		Status:      entity.Unconfirmed,
-		Type:        incident.Type,
-		Author:      incident.Author}, nil
+	res := dto.GetIncidentByIdResponse(dto.FromIncident(incident))
+	return &res, nil
 }
 
 func (uc *IncidentUseCase) Update(ctx context.Context, data dto.UpdateIncidentRequest) error {
-	err := uc.repo.Update(ctx, data.Id, entity.Incident{
+	err := uc.repo.Update(ctx, entity.Incident{
 		Id:        data.Id,
 		Name:      data.Name,
 		Date:      data.Date,
@@ -99,7 +82,7 @@ func (uc *IncidentUseCase) Update(ctx context.Context, data dto.UpdateIncidentRe
 		Latitude:  data.Latitude,
 		Longitude: data.Longitude,
 		Comment:   data.Comment,
-		Status:    entity.Unconfirmed,
+		Status:    data.Status,
 		Type:      data.Type,
 		Author:    data.Author})
 

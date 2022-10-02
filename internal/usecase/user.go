@@ -8,14 +8,6 @@ import (
 	"github.com/ekaterinamzr/green-alarm/internal/entity"
 )
 
-type UserRepository interface {
-	GetAll(context.Context) ([]entity.User, error)
-	GetById(context.Context, int) (*entity.User, error)
-	Update(context.Context, int, entity.User) error
-	ChangeRole(context.Context, int, int) error
-	Delete(context.Context, int) error
-}
-
 type UserUseCase struct {
 	repo UserRepository
 }
@@ -33,7 +25,8 @@ func (uc *UserUseCase) GetAll(ctx context.Context) (*dto.GetAllUsersResponse, er
 		return nil, fmt.Errorf("UserUseCase - GetAll - uc.repo.GetAll: %w", err)
 	}
 
-	return &dto.GetAllUsersResponse{Users: all}, nil
+	res := dto.GetAllUsersResponse(dto.FromUsers(all))
+	return &res, nil
 }
 
 func (uc *UserUseCase) GetById(ctx context.Context, data dto.GetUserByIdRequest) (*dto.GetUserByIdResponse, error) {

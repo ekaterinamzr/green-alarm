@@ -8,14 +8,6 @@ import (
 	"github.com/ekaterinamzr/green-alarm/internal/entity"
 )
 
-type StatusRepository interface {
-	Create(context.Context, entity.IncidentStatus) (int, error)
-	GetAll(context.Context) ([]entity.IncidentStatus, error)
-	GetById(context.Context, int) (*entity.IncidentStatus, error)
-	Update(context.Context, int, entity.IncidentStatus) error
-	Delete(context.Context, int) error
-}
-
 type StatusUseCase struct {
 	repo StatusRepository
 }
@@ -45,7 +37,8 @@ func (uc *StatusUseCase) GetAll(ctx context.Context) (*dto.GetAllStatusesRespons
 		return nil, fmt.Errorf("StatusUseCase - GetAll - uc.repo.GetAll: %w", err)
 	}
 
-	return &dto.GetAllStatusesResponse{Statuses: all}, nil
+	res := dto.GetAllStatusesResponse(dto.FromStatuses(all))
+	return &res, nil
 }
 
 func (uc *StatusUseCase) GetById(ctx context.Context, data dto.GetStatusByIdRequest) (*dto.GetStatusByIdResponse, error) {

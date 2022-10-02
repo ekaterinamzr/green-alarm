@@ -123,7 +123,7 @@ func (r *IncidentRepository) GetByType(ctx context.Context, requiredType int) ([
 	return incidents, nil
 }
 
-func (r *IncidentRepository) Update(ctx context.Context, id int, updated entity.Incident) error {
+func (r *IncidentRepository) Update(ctx context.Context, updated entity.Incident) error {
 	query := `	UPDATE 
 					incidents 
 				SET 
@@ -149,7 +149,7 @@ func (r *IncidentRepository) Update(ctx context.Context, id int, updated entity.
 		updated.Status,
 		updated.Type,
 		updated.Author,
-		id,
+		updated.Id,
 	)
 
 	if err != nil {

@@ -9,6 +9,7 @@ import (
 	"github.com/ekaterinamzr/green-alarm/config"
 	"github.com/ekaterinamzr/green-alarm/internal/controller/ginhttp"
 	"github.com/ekaterinamzr/green-alarm/internal/infrastructure/pgrepo"
+	"github.com/ekaterinamzr/green-alarm/internal/infrastructure/hash"
 	"github.com/ekaterinamzr/green-alarm/internal/infrastructure/token"
 	"github.com/ekaterinamzr/green-alarm/internal/usecase"
 	"github.com/ekaterinamzr/green-alarm/pkg/httpserver"
@@ -31,7 +32,7 @@ func Run(cfg *config.Config) {
 
 	token := token.NewTokenService(cfg.Auth.TokenTTL, cfg.Auth.SigningKey)
 
-	authUseCase := usecase.NewAuthUseCase(pgrepo.NewUserRepository(pg), token, cfg.Auth.Salt)
+	authUseCase := usecase.NewAuthUseCase(pgrepo.NewUserRepository(pg), token, hash.GenerateHash, cfg.Auth.Salt)
 	incidentUseCase := usecase.NewIncidentUseCase(pgrepo.NewIncidentRepository(pg))
 
 	statusUseCase := usecase.NewStatusUseCase(pgrepo.NewStatusRepository(pg))

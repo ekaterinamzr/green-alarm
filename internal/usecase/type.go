@@ -8,14 +8,6 @@ import (
 	"github.com/ekaterinamzr/green-alarm/internal/entity"
 )
 
-type TypeRepository interface {
-	Create(context.Context, entity.IncidentType) (int, error)
-	GetAll(context.Context) ([]entity.IncidentType, error)
-	GetById(context.Context, int) (*entity.IncidentType, error)
-	Update(context.Context, int, entity.IncidentType) error
-	Delete(context.Context, int) error
-}
-
 type TypeUseCase struct {
 	repo TypeRepository
 }
@@ -45,7 +37,8 @@ func (uc *TypeUseCase) GetAll(ctx context.Context) (*dto.GetAllTypesResponse, er
 		return nil, fmt.Errorf("TypeUseCase - GetAll - uc.repo.GetAll: %w", err)
 	}
 
-	return &dto.GetAllTypesResponse{Types: all}, nil
+	res := dto.GetAllTypesResponse(dto.FromTypes(all))
+	return &res, nil
 }
 
 func (uc *TypeUseCase) GetById(ctx context.Context, data dto.GetTypeByIdRequest) (*dto.GetTypeByIdResponse, error) {

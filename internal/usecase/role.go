@@ -8,14 +8,6 @@ import (
 	"github.com/ekaterinamzr/green-alarm/internal/entity"
 )
 
-type RoleRepository interface {
-	Create(context.Context, entity.UserRole) (int, error)
-	GetAll(context.Context) ([]entity.UserRole, error)
-	GetById(context.Context, int) (*entity.UserRole, error)
-	Update(context.Context, int, entity.UserRole) error
-	Delete(context.Context, int) error
-}
-
 type RoleUseCase struct {
 	repo RoleRepository
 }
@@ -45,7 +37,8 @@ func (uc *RoleUseCase) GetAll(ctx context.Context) (*dto.GetAllRolesResponse, er
 		return nil, fmt.Errorf("RoleUseCase - GetAll - uc.repo.GetAll: %w", err)
 	}
 
-	return &dto.GetAllRolesResponse{Roles: all}, nil
+	res := dto.GetAllRolesResponse(dto.FromRoles(all))
+	return &res, nil
 }
 
 func (uc *RoleUseCase) GetById(ctx context.Context, data dto.GetRoleByIdRequest) (*dto.GetRoleByIdResponse, error) {
