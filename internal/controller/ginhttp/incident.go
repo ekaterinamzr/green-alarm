@@ -20,7 +20,7 @@ func setIncidentRoutes(handler *gin.RouterGroup, m *middleware, uc Incident, l l
 	h := handler.Group("/incidents")
 	{
 		h.GET("", r.getAll)
-		h.POST("", r.create)
+		h.POST("", m.userIdentity(), r.create)
 		h.GET("/:id", r.getById)
 		h.PUT("/:id", r.update)
 		h.DELETE("/:id", r.delete)
@@ -36,8 +36,8 @@ func (r *incidentRoutes) create(c *gin.Context) {
 		return
 	}
 
-	// input.Author = c.GetInt("userId")
-	input.Author = 1
+	input.Author = c.GetInt("userId")
+	// input.Author = 1
 
 	output, err := r.uc.Create(c.Request.Context(), input)
 	if err != nil {

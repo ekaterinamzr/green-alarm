@@ -2,6 +2,7 @@ package ginhttp
 
 import (
 	"context"
+	"time"
 
 	"github.com/ekaterinamzr/green-alarm/internal/dto"
 	"github.com/ekaterinamzr/green-alarm/pkg/logger"
@@ -61,7 +62,15 @@ func NewRouter(handler *gin.Engine, l logger.Logger, a Auth, i Incident, t Incid
 	handler.Use(gin.Logger())
 	handler.Use(gin.Recovery())
 
-	handler.Use(cors.Default())
+	// handler.Use(cors.Default())
+
+	handler.Use(cors.New(cors.Config{
+		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Authorization", "Content-Length", "Content-Type"},
+		AllowCredentials: false,
+		MaxAge:           12 * time.Hour,
+		AllowAllOrigins:  true,
+	}))
 
 	m := newMiddleware(a.ParseToken)
 

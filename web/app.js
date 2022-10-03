@@ -1,10 +1,10 @@
 const apiUrl = "http://localhost:8080/api/"
 
 function getValue() {
-    var select = document.getElementById("select-type");
-    var value = select.value;
-    // console.log(value);
-    return value;
+    var select = document.getElementById("select-type")
+    var value = select.value
+    // console.log(value)
+    return value
 }
 
 async function fetchIncidents(incidentType) {
@@ -15,48 +15,48 @@ async function fetchIncidents(incidentType) {
             var url = `incidents?type=${incidentType}`
         }
 
-        const response = await fetch(`${apiUrl}${url}`);
+        const response = await fetch(`${apiUrl}${url}`)
 
         if (!response.ok) {
             throw new Error(`Failed to fetch incidents: ${response.status}`)
         }
 
-        return await response.json();
+        return await response.json()
     } catch (e) {
-        console.log(e);
+        console.log(e)
     }
 }
 
 function incidentElement(incident) {
-    const anchorElement = document.createElement('a');
+    const anchorElement = document.createElement('a')
     const url = "incidents/"
     anchorElement.setAttribute("href", `${apiUrl}${url}${incident.id}`)
-    anchorElement.setAttribute("target", "_blank");
-    anchorElement.innerText = incident.incident_name;
+    anchorElement.setAttribute("target", "_blank")
+    anchorElement.innerText = incident.incident_name
 
-    const incidentTitleElement = document.createElement("h3");
-    incidentTitleElement.appendChild(anchorElement);
+    const incidentTitleElement = document.createElement("h3")
+    incidentTitleElement.appendChild(anchorElement)
 
-    return incidentTitleElement;
+    return incidentTitleElement
 }
 
 function listIncidents(incidentContainerElementId) {
     incidentType = getValue()
-    const incidentContainerElement = document.getElementById(incidentContainerElementId);
+    const incidentContainerElement = document.getElementById(incidentContainerElementId)
     if (!incidentContainerElement) {
-        return;
+        return
     }
     fetchIncidents(incidentType).then(incidents => {
         if (!incidents) {
-            incidentContainerElement.innerHTML = "Инциденты не найдены";
-            return;
+            incidentContainerElement.innerHTML = "Инциденты не найдены"
+            return
         }
         console.log(incidents)
         for (const incident of incidents) {
-            incidentContainerElement.appendChild(incidentElement(incident));
+            incidentContainerElement.appendChild(incidentElement(incident))
         }
     }).catch(e => {
-        console.log(e);
+        console.log(e)
     })
 }
 
@@ -64,7 +64,7 @@ function listIncidents(incidentContainerElementId) {
 // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
 
 function initMap() {
-    ymaps.ready(init);
+    ymaps.ready(init)
 }
 
 function init() {
@@ -83,11 +83,11 @@ function init() {
             searchControlProvider: 'yandex#search'
         }
 
-    );
+    )
 
     fetchIncidents(incidentType).then(incidents => {
         if (!incidents) {
-            return;
+            return
         }
         for (const incident of incidents) {
             myMap.geoObjects
@@ -99,6 +99,102 @@ function init() {
                 }))
         }
     }).catch(e => {
-        console.log(e);
+        console.log(e)
     })
+}
+
+
+function sendSignup() {
+    const signupForm = document.getElementById('signup-form')
+
+    signupForm.addEventListener('submit', function (e) {
+        e.preventDefault()
+        const formData = new FormData(signupForm)
+        
+        var object = {};
+        formData.forEach(function(value, key){
+        object[key] = value;
+        });
+        var json = JSON.stringify(object);
+
+        console.log(json);
+
+        fetch(`${apiUrl}auth/sign-up`, {
+            method: "POST",
+            body: json
+        }).then(function (response) {
+            return response.text()
+        }).then(function (text) {
+            console.log(text)
+        }).catch(function (error) {
+            console.error(error)
+        })
+    })
+}
+
+
+function sendSignin() {
+    const signupForm = document.getElementById('signin-form')
+
+    signupForm.addEventListener('submit', function (e) {
+        e.preventDefault()
+        const formData = new FormData(signupForm)
+        
+        var object = {};
+        formData.forEach(function(value, key){
+        object[key] = value;
+        });
+        var json = JSON.stringify(object);
+
+        console.log(json);
+
+        fetch(`${apiUrl}auth/sign-in`, {
+            method: "POST",
+            body: json
+        }).then(function (response) {
+            return response.json()
+        }).then(function (text) {
+            localStorage.setItem('jwt', text.token);
+            console.log(localStorage.getItem('jwt'))
+            console.log(text)
+        }).catch(function (error) {
+            console.error(error)
+        })
+    })
+}
+
+
+function sendIncident() {
+    const signupForm = document.getElementById('incident-form')
+
+    signupForm.addEventListener('submit', function (e) {
+        e.preventDefault()
+        console.log("jwt:", localStorage.getItem('jwt'))
+        const formData = new FormData(signupForm)
+        
+        var object = {};
+        formData.forEach(function(value, key){
+        object[key] = value;
+        });
+        var json = JSON.stringify(object);
+
+        console.log(json);
+
+        fetch(`${apiUrl}incidents`, {
+            method: "POST",
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('jwt')},
+            body: json
+        }).then(function (response) {
+            return response.text()
+        }).then(function (text) {
+            console.log(text)
+        }).catch(function (error) {
+            console.error(error)
+        })
+    })
+}
+
+function signOut() {
+    localStorage.removeItem('jwt')
 }

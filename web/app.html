@@ -6,10 +6,35 @@
 
     <script src="https://api-maps.yandex.ru/2.1/?apikey=7f8e597a-1f6d-44d3-a9dc-99eab25ff130&lang=ru_RU" type="text/javascript">
     </script>
+    <title>Green alarm</title>
 
 </head>
 
 <body>
+    <div>
+        <a href="./signup.html">Регистрация</a>
+        <p><input type="button" value="Выход" onclick="signOut()"></p>
+        <!-- <a href="./signup.html">Выход</a> -->
+    <form id="signin-form">
+        <p>Вход:<br>
+          Логин: <input type="text" name="username" value=""><br>
+          Пароль:  <input type="text" name="user_password" value=""><br>
+          <input type="submit" value="Войти">
+        </p>
+      </form>
+      <form id="incident-form">
+        <p>Инцидент:<br>
+          Название: <input type="text" name="incident_name" value="test"><br>
+          Дата:  <input type="text" name="incident_date" value="2022-09-01T00:00:00Z"><br>
+          Страна:  <input type="text" name="country" value="Country"><br>
+          Широта: <input type="text" name="latitude" value="45"><br>
+          Долгота: <input type="text" name="longitude" value="45"><br>
+          Комментарий:  <input type="text" name="comment" value="Some comment"><br>
+          Тип:  <input type="text" name="incident_type" value="3"><br>
+          <input type="submit" value="Опубликовать">
+        </p>
+      </form>
+    
     <select id="select-type">
         <option value="0">Все типы инцидентов</option>
         <option value="1">Разлив нефти или нефтепродуктов</option>
@@ -28,8 +53,10 @@
     </div>
     <script src="app.js"></script>
     <script>
-        initMap();
-        listIncidents("incident-items-container");
+        sendSignin()
+        sendIncident()
+        initMap()
+        listIncidents("incident-items-container")
     </script>
 </body>
 

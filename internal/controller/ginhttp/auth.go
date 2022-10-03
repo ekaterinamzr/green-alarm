@@ -18,8 +18,8 @@ func setAuthRoutes(handler *gin.RouterGroup, u Auth, l logger.Logger) {
 
 	h := handler.Group("/auth")
 	{
-		h.POST("sign-up", r.signUp)
-		h.POST("sign-in", r.signIn)
+		h.POST("/sign-up", r.signUp)
+		h.POST("/sign-in", r.signIn)
 	}
 }
 
