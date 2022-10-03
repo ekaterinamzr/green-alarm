@@ -39,7 +39,7 @@ func (r *RoleRepository) GetAll(ctx context.Context) ([]entity.UserRole, error) 
 
 	query := `	SELECT 
 					id, 
-					role_name, 
+					role_name 
 				FROM 
 					roles`
 

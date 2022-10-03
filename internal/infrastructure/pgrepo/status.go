@@ -39,7 +39,7 @@ func (r *StatusRepository) GetAll(ctx context.Context) ([]entity.IncidentStatus,
 
 	query := `	SELECT 
 					id, 
-					status_name, 
+					status_name
 				FROM 
 					statuses`
 					

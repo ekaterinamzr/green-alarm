@@ -9,3 +9,5 @@ mocks:
 build:
 	go build -v ./cmd/main.go
 
+# sudo docker compose up -d
+# sudo docker compose down -v

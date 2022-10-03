@@ -39,7 +39,7 @@ func (r *TypeRepository) GetAll(ctx context.Context) ([]entity.IncidentType, err
 
 	query := `	SELECT 
 					id, 
-					type_name, 
+					type_name 
 				FROM 
 					types`
 					
