@@ -40,7 +40,7 @@ services:
         volumes:
             - ./initmg:/docker-entrypoint-initdb.d
             - mongo-volume:/data/db
-            - ./csvs:/data/scvs
+            - ./csvsmg:/data/scvs
 
 volumes:
   pgdata:

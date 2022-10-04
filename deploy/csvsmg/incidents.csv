@@ -1,0 +1,2 @@
+_id,incident_name,incident_date,country,latitude,longitude,publication_date,comment,incident_status,incident_type,author
+1,Массовая гибель морских животных на Камчатке,2020-09-29T00:00:00Z,Россия,53.013060,158.828060,2022-08-20T00:00:00Z,,1,7,1
