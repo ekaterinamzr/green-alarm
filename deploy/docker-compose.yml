@@ -26,23 +26,7 @@ services:
       - pgdata:/var/lib/postgresql/data
       - ./csvs:/var/lib/postgresql/csvs
     restart: always
-  
-  mongodb:
-        image: mongo:latest
-        container_name: mongodbc
-        restart: always
-        environment:
-            MONGO_INITDB_ROOT_USERNAME: greenalarm
-            MONGO_INITDB_ROOT_PASSWORD: greenalarm
-            MONGO_INITDB_DATABASE: greenalarm
-        ports:
-            - 27017:27017
-        volumes:
-            - ./initmg:/docker-entrypoint-initdb.d
-            - mongo-volume:/data/db
-            - ./csvs:/data/scvs
 
 volumes:
   pgdata:
-  mongo-volume:
   
