@@ -19,13 +19,13 @@
 ![Use-case диаграмма](https://github.com/ekaterinamzr/green-alarm/blob/main/docs/diagrams/usecase.svg)
 
 ## ER-диаграмма сущностей
-![ER-диаграмма сущностей](https://github.com/ekaterinamzr/green-alarm/blob/main/docs/diagrams/er.svg)
+![ER-диаграмма сущностей](https://github.com/ekaterinamzr/green-alarm/blob/main/docs/diagrams/entities.svg)
 
-## ER-диаграмма сущностей
-![ER-диаграмма сущностей](https://github.com/ekaterinamzr/green-alarm/blob/main/docs/diagrams/er.svg)
+## Разбиение на компоненты
+![Разбиение на компоненты](https://github.com/ekaterinamzr/green-alarm/blob/main/docs/diagrams/components.svg)
 
-## ER-диаграмма сущностей
-![ER-диаграмма сущностей](https://github.com/ekaterinamzr/green-alarm/blob/main/docs/diagrams/er.svg)
+## UML компонентов доступа к данным и логики приложения
+![UML](https://github.com/ekaterinamzr/green-alarm/blob/main/docs/diagrams/uml.svg)
 
 ## Архитектурные характеристики
 * Веб-приложение
