@@ -16,12 +16,18 @@
 | EM-DAT                                                                  | Все типы инцидентов и катастроф (не только экологических) | -           | -                                                                       |
 | Twitter                                                                 | Любые инциденты (и не только)                                          | -           | +                                                                       |
 ## Use-case диаграмма
-![Use-case диаграмма](https://github.com/ekaterinamzr/green-alarm/blob/main/doc/img/usecase.jpg)
+![Use-case диаграмма](https://github.com/ekaterinamzr/green-alarm/blob/main/docs/diagrams/usecase.svg)
 
 ## ER-диаграмма сущностей
-![ER-диаграмма сущностей](https://github.com/ekaterinamzr/green-alarm/blob/main/doc/img/er.svg)
+![ER-диаграмма сущностей](https://github.com/ekaterinamzr/green-alarm/blob/main/docs/diagrams/er.svg)
+
+## ER-диаграмма сущностей
+![ER-диаграмма сущностей](https://github.com/ekaterinamzr/green-alarm/blob/main/docs/diagrams/er.svg)
+
+## ER-диаграмма сущностей
+![ER-диаграмма сущностей](https://github.com/ekaterinamzr/green-alarm/blob/main/docs/diagrams/er.svg)
 
 ## Архитектурные характеристики
 * Веб-приложение
-* Язык разработки - Golang
-* СУБД - Postgres
+* Язык разработки -- Go
+* СУБД -- PostgreSQL
