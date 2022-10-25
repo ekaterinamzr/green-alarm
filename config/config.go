@@ -40,9 +40,9 @@ type Config struct {
 	MongoDB  MongoDBConfig
 }
 
-func Load() (*Config, error) {
+func Load(name string) (*Config, error) {
 	v := viper.New()
-	v.SetConfigName("config")
+	v.SetConfigName(name)
 	v.SetConfigType("yaml")
 	v.AddConfigPath("./config")
 

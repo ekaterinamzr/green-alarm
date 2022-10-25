@@ -1,0 +1,24 @@
+logger:
+  level: "debug"
+
+server:
+  port: 8080
+
+# mg / pg
+dbtype: "pg" 
+
+database:
+  name: "greenalarm"
+  user: "greenalarm"
+  password: "greenalarm"
+  # uri: postgres://greenalarm:greenalarm@postgresc:5432/greenalarm?sslmode=disable 
+  uri: postgres://greenalarm:greenalarm@localhost:5432/greenalarm?sslmode=disable 
+
+auth:
+  salt: "hefhuyr3746347hgruf83hhjw93!"
+  tokenTTL: 12  #hours
+  signingKey: "jfbwfgwufhwefh3r78ehfief3"
+
+mongodb:
+  # uri: "mongodb://greenalarm:greenalarm@mongodbc:27017"
+  uri: "mongodb://greenalarm:greenalarm@localhost:27017"
