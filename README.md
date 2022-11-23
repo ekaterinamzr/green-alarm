@@ -31,3 +31,6 @@
 * Веб-приложение
 * Язык разработки — Go
 * СУБД — PostgreSQL
+
+## Эскиз главной страницы
+![UML](https://github.com/ekaterinamzr/green-alarm/blob/main/docs/diagrams/main-page.svg)
