@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/ekaterinamzr/green-alarm/internal/dto"
+	"github.com/ekaterinamzr/green-alarm/internal/entity"
 	"github.com/ekaterinamzr/green-alarm/pkg/logger"
 	"github.com/gin-gonic/gin"
 )
@@ -18,6 +19,7 @@ func setRoleRoutes(handler *gin.RouterGroup, m *middleware, uc UserRole, l logge
 	r := &roleRoutes{uc, l}
 
 	h := handler.Group("/roles")
+	h.Use(m.userIdentity(), m.checkRole(entity.Admin))
 	{
 		h.GET("", r.getAll)
 		h.POST("", r.create)
@@ -27,6 +29,16 @@ func setRoleRoutes(handler *gin.RouterGroup, m *middleware, uc UserRole, l logge
 	}
 }
 
+// @Summary Create
+// @Security ApiKeyAuth
+// @Tags Roles
+// @Description Create role
+// @Accept json
+// @Produce json
+// @Param input body dto.CreateRoleRequest true "New role data"
+// @Success 200 {object} dto.CreateRoleResponse
+// @Failure 400,500 {object} response
+// @Router /roles [post]
 func (r *roleRoutes) create(c *gin.Context) {
 	var input dto.CreateRoleRequest
 
@@ -46,6 +58,14 @@ func (r *roleRoutes) create(c *gin.Context) {
 	c.JSON(http.StatusOK, output)
 }
 
+// @Summary Get all
+// @Security ApiKeyAuth
+// @Tags Roles
+// @Description Get list of roles
+// @Produce json
+// @Success 200 {object} dto.GetAllRolesResponse
+// @Failure 400,500 {object} response
+// @Router /roles [get]
 func (r *roleRoutes) getAll(c *gin.Context) {
 	output, err := r.uc.GetAll(c.Request.Context())
 	if err != nil {
@@ -57,6 +77,14 @@ func (r *roleRoutes) getAll(c *gin.Context) {
 	c.JSON(http.StatusOK, output)
 }
 
+// @Summary Get by id
+// @Security ApiKeyAuth
+// @Tags Roles
+// @Description Get role by id
+// @Produce json
+// @Success 200 {object} dto.GetRoleByIdResponse
+// @Failure 400,500 {object} response
+// @Router /roles/{id} [get]
 func (r *roleRoutes) getById(c *gin.Context) {
 	var input dto.GetRoleByIdRequest
 
@@ -79,6 +107,16 @@ func (r *roleRoutes) getById(c *gin.Context) {
 	c.JSON(http.StatusOK, output)
 }
 
+// @Summary Update
+// @Security ApiKeyAuth
+// @Tags Roles
+// @Description Update role
+// @Accept json
+// @Param id path int true "id"
+// @Param input body dto.UpdateRoleRequest true "Updated role data"
+// @Success 200
+// @Failure 400,500 {object} response
+// @Router /roles/{id} [put]
 func (r *roleRoutes) update(c *gin.Context) {
 	var input dto.UpdateRoleRequest
 
@@ -107,6 +145,13 @@ func (r *roleRoutes) update(c *gin.Context) {
 	c.Status(http.StatusOK)
 }
 
+// @Summary Delete
+// @Security ApiKeyAuth
+// @Tags Roles
+// @Description Delete role
+// @Success 200
+// @Failure 400,500 {object} response
+// @Router /roles/{id} [delete]
 func (r *roleRoutes) delete(c *gin.Context) {
 	var input dto.DeleteRoleRequest
 

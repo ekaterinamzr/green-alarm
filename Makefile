@@ -9,5 +9,8 @@ mocks:
 build:
 	go build -v ./cmd/main.go
 
+swag:
+	swag init -g ./cmd/main.go
+
 # sudo docker compose up -d
 # sudo docker compose down -v

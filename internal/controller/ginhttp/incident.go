@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/ekaterinamzr/green-alarm/internal/dto"
+	"github.com/ekaterinamzr/green-alarm/internal/entity"
 	"github.com/ekaterinamzr/green-alarm/pkg/logger"
 	"github.com/gin-gonic/gin"
 )
@@ -22,11 +23,22 @@ func setIncidentRoutes(handler *gin.RouterGroup, m *middleware, uc Incident, l l
 		h.GET("", r.getAll)
 		h.POST("", m.userIdentity(), r.create)
 		h.GET("/:id", r.getById)
-		h.PUT("/:id", r.update)
-		h.DELETE("/:id", r.delete)
+		h.PUT("/:id", m.userIdentity(), m.checkRole(entity.Moderator), r.update)
+		h.DELETE("/:id", m.userIdentity(), m.checkRole(entity.Moderator), r.delete)
 	}
+
 }
 
+// @Summary Create
+// @Security ApiKeyAuth
+// @Tags Incidents
+// @Description Report an incident
+// @Accept json
+// @Produce json
+// @Param input body dto.CreateIncidentRequest true "New incident data"
+// @Success 200 {object} dto.CreateIncidentResponse
+// @Failure 400,500 {object} response
+// @Router /incidents [post]
 func (r *incidentRoutes) create(c *gin.Context) {
 	var input dto.CreateIncidentRequest
 
@@ -49,6 +61,13 @@ func (r *incidentRoutes) create(c *gin.Context) {
 	c.JSON(http.StatusOK, output)
 }
 
+// @Summary Get all
+// @Tags Incidents
+// @Description Get list of incidents
+// @Produce json
+// @Success 200 {object} dto.GetIncidentsResponse
+// @Failure 400,500 {object} response
+// @Router /incidents [get]
 func (r *incidentRoutes) getAll(c *gin.Context) {
 	if c.Query("type") == "" {
 		output, err := r.uc.GetAll(c.Request.Context())
@@ -75,6 +94,13 @@ func (r *incidentRoutes) getAll(c *gin.Context) {
 	}
 }
 
+// @Summary Get by id
+// @Tags Incidents
+// @Description Get incident by id
+// @Produce json
+// @Success 200 {object} dto.GetIncidentByIdResponse
+// @Failure 400,500 {object} response
+// @Router /incidents/{id} [get]
 func (r *incidentRoutes) getById(c *gin.Context) {
 	var input dto.GetIncidentByIdRequest
 
@@ -97,6 +123,16 @@ func (r *incidentRoutes) getById(c *gin.Context) {
 	c.JSON(http.StatusOK, output)
 }
 
+// @Summary Update
+// @Security ApiKeyAuth
+// @Tags Incidents
+// @Description Update incident
+// @Accept json
+// @Param        id   path      int  true  "id"
+// @Param input body dto.UpdateIncidentRequest true "Updated incident data"
+// @Success 200
+// @Failure 400,500 {object} response
+// @Router /incidents/{id} [put]
 func (r *incidentRoutes) update(c *gin.Context) {
 	var input dto.UpdateIncidentRequest
 
@@ -125,6 +161,13 @@ func (r *incidentRoutes) update(c *gin.Context) {
 	c.Status(http.StatusOK)
 }
 
+// @Summary Delete
+// @Security ApiKeyAuth
+// @Tags Incidents
+// @Description Delete incident
+// @Success 200
+// @Failure 400,500 {object} response
+// @Router /incidents/{id} [delete]
 func (r *incidentRoutes) delete(c *gin.Context) {
 	var input dto.DeleteIncidentRequest
 

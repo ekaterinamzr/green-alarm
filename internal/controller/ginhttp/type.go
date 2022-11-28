@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/ekaterinamzr/green-alarm/internal/dto"
+	"github.com/ekaterinamzr/green-alarm/internal/entity"
 	"github.com/ekaterinamzr/green-alarm/pkg/logger"
 	"github.com/gin-gonic/gin"
 )
@@ -18,6 +19,7 @@ func setTypeRoutes(handler *gin.RouterGroup, m *middleware, uc IncidentType, l l
 	r := &typeRoutes{uc, l}
 
 	h := handler.Group("/types")
+	h.Use(m.userIdentity(), m.checkRole(entity.Admin))
 	{
 		h.GET("", r.getAll)
 		h.POST("", r.create)
@@ -27,6 +29,16 @@ func setTypeRoutes(handler *gin.RouterGroup, m *middleware, uc IncidentType, l l
 	}
 }
 
+// @Summary Create
+// @Security ApiKeyAuth
+// @Tags Types
+// @Description Create type
+// @Accept json
+// @Produce json
+// @Param input body dto.CreateTypeRequest true "New type data"
+// @Success 200 {object} dto.CreateTypeResponse
+// @Failure 400,500 {object} response
+// @Router /types [post]
 func (r *typeRoutes) create(c *gin.Context) {
 	var input dto.CreateTypeRequest
 
@@ -46,6 +58,14 @@ func (r *typeRoutes) create(c *gin.Context) {
 	c.JSON(http.StatusOK, output)
 }
 
+// @Summary Get all
+// @Security ApiKeyAuth
+// @Tags Types
+// @Description Get list of types
+// @Produce json
+// @Success 200 {object} dto.GetAllTypesResponse
+// @Failure 400,500 {object} response
+// @Router /types [get]
 func (r *typeRoutes) getAll(c *gin.Context) {
 	output, err := r.uc.GetAll(c.Request.Context())
 	if err != nil {
@@ -57,6 +77,14 @@ func (r *typeRoutes) getAll(c *gin.Context) {
 	c.JSON(http.StatusOK, output)
 }
 
+// @Summary Get by id
+// @Security ApiKeyAuth
+// @Tags Types
+// @Description Get type by id
+// @Produce json
+// @Success 200 {object} dto.GetTypeByIdResponse
+// @Failure 400,500 {object} response
+// @Router /types/{id} [get]
 func (r *typeRoutes) getById(c *gin.Context) {
 	var input dto.GetTypeByIdRequest
 
@@ -79,6 +107,16 @@ func (r *typeRoutes) getById(c *gin.Context) {
 	c.JSON(http.StatusOK, output)
 }
 
+// @Summary Update
+// @Security ApiKeyAuth
+// @Tags Types
+// @Description Update type
+// @Accept json
+// @Param id path int true "id"
+// @Param input body dto.UpdateTypeRequest true "Updated type data"
+// @Success 200
+// @Failure 400,500 {object} response
+// @Router /types/{id} [put]
 func (r *typeRoutes) update(c *gin.Context) {
 	var input dto.UpdateTypeRequest
 
@@ -107,6 +145,13 @@ func (r *typeRoutes) update(c *gin.Context) {
 	c.Status(http.StatusOK)
 }
 
+// @Summary Delete
+// @Security ApiKeyAuth
+// @Tags Types
+// @Description Delete type
+// @Success 200
+// @Failure 400,500 {object} response
+// @Router /types/{id} [delete]
 func (r *typeRoutes) delete(c *gin.Context) {
 	var input dto.DeleteTypeRequest
 

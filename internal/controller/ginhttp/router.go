@@ -8,6 +8,10 @@ import (
 	"github.com/ekaterinamzr/green-alarm/pkg/logger"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+
+	"github.com/swaggo/gin-swagger" // gin-swagger middleware
+	"github.com/swaggo/files"
+	_"github.com/ekaterinamzr/green-alarm/docs"
 )
 
 type Auth interface {
@@ -85,5 +89,7 @@ func NewRouter(handler *gin.Engine, l logger.Logger, a Auth, i Incident, t Incid
 		setUserRoutes(h, m, u, l)
 		setRoleRoutes(h, m, r, l)
 	}
+
+	handler.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 }

@@ -38,16 +38,8 @@ CREATE TABLE Types (
   type_name varchar NOT NULL
 );
 
-CREATE TABLE Editing_Requests (
-  id SERIAL PRIMARY KEY,
-  old int NOT NULL,
-  new int NOT NULL
-);
 
 ALTER TABLE Users ADD FOREIGN KEY (user_role) REFERENCES Roles (id);
 ALTER TABLE Incidents ADD FOREIGN KEY (incident_type) REFERENCES Types (id);
 ALTER TABLE Incidents ADD FOREIGN KEY (incident_status) REFERENCES Statuses (id);
 ALTER TABLE Incidents ADD FOREIGN KEY (author) REFERENCES Users (id);
-ALTER TABLE Editing_Requests ADD FOREIGN KEY (old) REFERENCES Incidents (id);
-ALTER TABLE Editing_Requests ADD FOREIGN KEY (new) REFERENCES Incidents (id);
-

@@ -23,6 +23,15 @@ func setAuthRoutes(handler *gin.RouterGroup, u Auth, l logger.Logger) {
 	}
 }
 
+// @Summary SignUp
+// @Tags auth
+// @Description Create account
+// @Accept json
+// @Produce json
+// @Param input body dto.SignUpRequest true "New user info"
+// @Success 200 {object} dto.SignUpResponse
+// @Failure 400,500 {object} response
+// @Router /auth/sign-up [post]
 func (r *authRoutes) signUp(c *gin.Context) {
 	var input dto.SignUpRequest
 
@@ -42,6 +51,15 @@ func (r *authRoutes) signUp(c *gin.Context) {
 	c.JSON(http.StatusOK, output)
 }
 
+// @Summary SignIn
+// @Tags auth
+// @Description Sign in
+// @Accept json
+// @Produce json
+// @Param input body dto.SignInRequest true "Login, password"
+// @Success 200 {object} dto.SignInResponse
+// @Failure 400,500 {object} response
+// @Router /auth/sign-in [post]
 func (r *authRoutes) signIn(c *gin.Context) {
 	var input dto.SignInRequest
 

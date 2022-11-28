@@ -56,7 +56,7 @@ func (r *UserRepository) GetUser(ctx context.Context, username, password string)
 
 	if err := row.StructScan(&user); err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
-			return nil, fmt.Errorf("User not found: %w", err)
+			return nil, fmt.Errorf("user not found: %w", err)
 		}
 		return nil, fmt.Errorf("pgrepo - user - GetUser: %w", err)
 	}
@@ -121,6 +121,9 @@ func (r *UserRepository) Update(ctx context.Context, id int, updated entity.User
 				WHERE 
 					id = $7`
 
+	fmt.Printf("id to update: %d", id)
+	fmt.Println("updated data:", updated)
+
 	_, err := r.DB.ExecContext(ctx, query,
 		updated.FirstName,
 		updated.LastName,
@@ -146,13 +149,16 @@ func (r *UserRepository) ChangeRole(ctx context.Context, id, newRole int) error 
 				WHERE 
 					id = $2`
 
-	_, err := r.DB.ExecContext(ctx, query,
+	res, err := r.DB.ExecContext(ctx, query,
 		newRole,
 		id,
 	)
 
+	fmt.Println(newRole, id)
+	fmt.Println(res)
+
 	if err != nil {
-		return fmt.Errorf("pgrepo - user - UpdateRole: %w", err)
+		return fmt.Errorf("pgrepo - user - ChangeRole: %w", err)
 	}
 
 	return nil

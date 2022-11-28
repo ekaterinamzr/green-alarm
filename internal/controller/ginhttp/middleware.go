@@ -2,6 +2,7 @@ package ginhttp
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"strings"
 
@@ -38,8 +39,10 @@ func (m *middleware) userIdentity() gin.HandlerFunc {
 			return
 		}
 
+		fmt.Println(header)
+
 		headerParts := strings.Split(header, " ")
-		if len(headerParts) != 2 {
+		if len(headerParts) < 2 {
 			errorResponse(c, http.StatusUnauthorized, "invalid auth header")
 			return
 		}
