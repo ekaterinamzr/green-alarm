@@ -16,16 +16,16 @@
 | EM-DAT                                                                  | Все типы инцидентов и катастроф (не только экологических) | -           | -                                                                       |
 | Twitter                                                                 | Любые инциденты (и не только)                                          | -           | +                                                                       |
 ## Use-case диаграмма
-![Use-case диаграмма](https://github.com/ekaterinamzr/green-alarm/blob/main/docs/diagrams/usecase.svg)
+![Use-case диаграмма](https://github.com/ekaterinamzr/green-alarm/blob/main/diagrams/usecase.svg)
 
 ## ER-диаграмма сущностей
-![ER-диаграмма сущностей](https://github.com/ekaterinamzr/green-alarm/blob/main/docs/diagrams/entities.svg)
+![ER-диаграмма сущностей](https://github.com/ekaterinamzr/green-alarm/blob/main/diagrams/entities.svg)
 
 ## Разбиение на компоненты
-![Разбиение на компоненты](https://github.com/ekaterinamzr/green-alarm/blob/main/docs/diagrams/components.svg)
+![Разбиение на компоненты](https://github.com/ekaterinamzr/green-alarm/blob/main/diagrams/components.svg)
 
 ## UML компонентов доступа к данным и логики приложения
-![UML](https://github.com/ekaterinamzr/green-alarm/blob/main/docs/diagrams/uml.svg)
+![UML](https://github.com/ekaterinamzr/green-alarm/blob/main/diagrams/uml.svg)
 
 ## Архитектурные характеристики
 * Веб-приложение
@@ -33,4 +33,4 @@
 * СУБД — PostgreSQL
 
 ## Эскиз главной страницы
-![UML](https://github.com/ekaterinamzr/green-alarm/blob/main/docs/diagrams/main-page.svg)
+![UML](https://github.com/ekaterinamzr/green-alarm/blob/main/diagrams/main-page.svg)
