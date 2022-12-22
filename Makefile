@@ -12,5 +12,7 @@ build:
 swag:
 	swag init -g ./cmd/main.go
 
+# sudo docker build .
+
 # sudo docker compose up -d
 # sudo docker compose down -v

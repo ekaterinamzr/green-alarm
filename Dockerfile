@@ -19,6 +19,7 @@ RUN CGO_ENABLED=0 go build -o main ./cmd/main.go
 FROM scratch
 
 COPY --from=builder /app/config/config.yml /config/config.yml
+COPY --from=builder /app/docs /docs
 COPY --from=builder /app/main /main
 
 CMD ["/main"]
