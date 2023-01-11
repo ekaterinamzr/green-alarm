@@ -1,2 +1,2 @@
-first_name,last_name,username,email,user_password,user_role
-Админ,Админ,admin,admin@mail.ru,admin,1
+first_name;last_name;username;email;user_password;user_role
+Админ;Админ;admin;admin@admin.com;68656668757972333734363334376867727566383368686a77393321d033e22ae348aeb5660fc2140aec35850c4da997;1

@@ -1,0 +1,12 @@
+.layout {
+  height: 100%;
+}
+
+.body {
+  padding: 50px;
+  background: #dcffb9  !important;
+}
+
+.space {
+  display: flex;
+}

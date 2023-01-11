@@ -1,8 +1,9 @@
 version: '3.9'
 services:
   app:
-    container_name: greenalarm
-    image: greenalarm
+    # container_name: greenalarm
+    image: server
+    # build: ../server
     environment:
       PG_URL: 'postgres://greenalarm:greenalarm@postgresc:5432/greenalarm'
     expose:
@@ -14,8 +15,9 @@ services:
       - postgres
 
   app_ro_1:
-    container_name: greenalarm_ro_1
-    image: greenalarm
+    # container_name: greenalarm_ro_1
+    image: server
+    # build: ../server
     environment:
       PG_URL: 'postgres://greenalarm:greenalarm@postgresc:5432/greenalarm'
     expose:
@@ -25,8 +27,9 @@ services:
       - postgres
 
   app_ro_2:
-    container_name: greenalarm_ro_2
-    image: greenalarm
+    # container_name: greenalarm_ro_2
+    image: server
+    # build: ../server
     environment:
       PG_URL: 'postgres://greenalarm:greenalarm@postgresc:5432/greenalarm'
     expose:
@@ -36,8 +39,9 @@ services:
       - postgres
 
   app_tmp:
-    container_name: greenalarm_tmp
-    image: greenalarm
+    # container_name: greenalarm_tmp
+    image: server
+    # build: ../server
     environment:
       PG_URL: 'postgres://greenalarm:greenalarm@postgresc:5432/greenalarm'
       HTTP_BASE_PATH: "/mirror1"
@@ -75,6 +79,15 @@ services:
       - ./nginx/greenalarm.conf:/etc/nginx/conf.d/default.conf
       - ./nginx/static:/static
       - ./nginx/cache/:/var/nginx/cache/
+
+  client:
+    image: client
+    # build: ../client
+    ports:
+      - "3000:3000"
+    restart: always
+    depends_on:
+      - app
 
 volumes:
   pgdata:
